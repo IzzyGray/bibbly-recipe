@@ -1,102 +1,107 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh lpR fFf">
+
+    <!-- Header -->
+    <q-header elevated style="background-color: #087F8C; color: white;">
+
+
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <!-- Zurück-Button nur auf bestimmten Seiten -->
+        <q-btn v-if="showBackButton" flat dense icon="arrow_back" @click="goBack"
+          :label="$q.screen.gt.sm ? 'Zurück' : undefined" :round="$q.screen.lt.sm" />
 
-        <div>Quasar v{{ $q.version }}</div>
+
+        <q-toolbar-title class="text-center app-title">bibbly <span class="subtitle">recipes</span></q-toolbar-title>
+        <q-btn flat round dense icon="menu" @click="rightDrawerOpen = !rightDrawerOpen" />
+
+
       </q-toolbar>
+
+
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <!-- Right Drawer -->
+    <q-drawer side="right" v-model="rightDrawerOpen" overlay bordered behavior="desktop">
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item clickable v-ripple @click="onImport">
+          <q-item-section avatar><q-icon name="file_upload" /></q-item-section>
+          <q-item-section>Importieren</q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple @click="onShare">
+          <q-item-section avatar><q-icon name="share" /></q-item-section>
+          <q-item-section>Teilen</q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple @click="onAgb">
+          <q-item-section avatar><q-icon name="gavel" /></q-item-section>
+          <q-item-section>AGB</q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple @click="onImpressum">
+          <q-item-section avatar><q-icon name="info" /></q-item-section>
+          <q-item-section>Impressum</q-item-section>
+        </q-item>
+
+        <q-separator spaced />
+
+        <q-item clickable v-ripple @click="onLogout">
+          <q-item-section avatar><q-icon name="logout" /></q-item-section>
+          <q-item-section>Abmelden</q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 
+    <!-- Seiteninhalt -->
     <q-page-container>
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router'
 
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
+const rightDrawerOpen = ref(false);
+const route = useRoute();
 
-const leftDrawerOpen = ref(false);
+const router = useRouter();
+// Hier gibst du die Routen-Namen an, bei denen der Zurück-Button angezeigt werden soll
+const showBackButton = computed(() =>
+  ['recipe-detail'].includes(route.name as string)
+);
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+function goBack() {
+  void router.push('/home') // oder router.back()
+}
+
+// Beispielaktionen:
+function onImport() {
+  console.log('Importieren geklickt')
+}
+
+function onShare() {
+  console.log('Teilen geklickt')
+}
+
+function onAgb() {
+  console.log('AGB geklickt')
+}
+
+function onImpressum() {
+  console.log('Impressum geklickt')
+}
+
+
+function onLogout() {
+  console.log('Logout geklickt')
 }
 </script>
+
+<style scoped></style>
