@@ -6,7 +6,7 @@
         <div class="text-subtitle2 text-grey-7">Melde dich an, um fortzufahren</div>
       </q-card-section>
 
-      <q-form @submit="onSubmit" class="q-gutter-md q-mt-md">
+      <q-form @submit.prevent="onSubmit" class="q-gutter-md q-mt-md">
         <q-input v-model="email" type="email" label="E-Mail" outlined dense
           :rules="[val => !!val || 'E-Mail ist erforderlich']" />
         <q-input v-model="password" type="password" label="Passwort" outlined dense
@@ -35,6 +35,8 @@ const $q = useQuasar();
 const router = useRouter();
 
 function onSubmit() {
+  console.log('Login-Funktion wurde aufgerufen');
+
   if (!email.value || !password.value) return;
 
   // Dummy-Login: Du kannst hier später echte Authentifizierung einbauen
