@@ -2,15 +2,17 @@
   <q-layout view="hHh pR fFf">
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
-    <q-header v-if="isSimpleHeader" class="bg-white text-primary" elevated>
+    <q-header v-if="isSimpleHeader" class="bg-white" elevated>
       <q-toolbar class="justify-between">
         <div class="row items-center">
-          <q-avatar icon="restaurant_menu" color="primary" text-color="white" />
-          <q-toolbar-title class="q-ml-sm">Bibbly</q-toolbar-title>
+          <q-avatar icon="restaurant_menu" color="teal" text-color="white" />
+          <q-toolbar-title class="text-center app-title-welcome">
+            bibbly <span class="subtitle">recipes</span>
+          </q-toolbar-title>
         </div>
         <div class="row items-center q-gutter-sm q-pr-sm">
           <q-btn flat label="Login" color="primary" @click="goToLogin" />
-          <q-btn flat label="Sign Up" color="secondary" @click="goToRegister" />
+          <q-btn flat label="Sign Up" color="teal" @click="goToRegister" />
         </div>
       </q-toolbar>
     </q-header>

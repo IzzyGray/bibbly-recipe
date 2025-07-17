@@ -3,7 +3,7 @@
     <div class="column items-center justify-center q-pa-md" style="min-height: calc(100vh - 300px);">
       <q-card class="q-pa-xl shadow-2 bg-white" style="max-width: 400px; width: 100%; border-radius: 16px;">
         <q-card-section class="text-center">
-          <q-icon name="restaurant_menu" size="64px" color="primary" />
+          <q-icon name="restaurant_menu" size="64px" color="teal" />
           <div class="text-h4 q-mt-md">Willkommen bei Bibbly</div>
           <div class="text-subtitle1 text-grey-7 q-mt-sm">
             Deine digitale Rezeptesammlung. Schnell. Einfach. Lecker.
@@ -15,7 +15,7 @@
           <q-input v-model="demoUrl" label="Rezept-URL eingeben" dense outlined type="url" :rules="[isValidUrl]"
             class="q-mt-sm">
             <template #append>
-              <q-btn flat icon="send" @click="submitUrl" />
+              <q-btn flat icon="send" color="teal" @click="submitUrl" />
             </template>
           </q-input>
         </q-form>
@@ -33,7 +33,7 @@
 
         <!-- Products -->
         <div class="col-12 col-sm-6 col-md-2 q-mb-sm">
-          <div class="text-subtitle2 q-mb-xs">Products</div>
+          <div class="text-subtitle2 midnight-green q-mb-xs">Products</div>
           <div class="column no-wrap">
             <div v-for="item in products" :key="item" class="text-body2 q-mb-xs">
               {{ item }}
@@ -43,7 +43,7 @@
 
         <!-- Resources -->
         <div class="col-12 col-sm-6 col-md-2 q-mb-sm">
-          <div class="text-subtitle2 q-mb-xs">Resources</div>
+          <div class="text-subtitle2 midnight-green q-mb-xs">Resources</div>
           <div class="column no-wrap">
             <div v-for="item in resources" :key="item" class="text-body2 q-mb-xs">
               {{ item }}
@@ -53,7 +53,7 @@
 
         <!-- Company -->
         <div class="col-12 col-sm-6 col-md-2 q-mb-sm">
-          <div class="text-subtitle2 q-mb-xs">Company</div>
+          <div class="text-subtitle2 midnight-green q-mb-xs">Company</div>
           <div class="column no-wrap">
             <div v-for="item in company" :key="item" class="text-body2 q-mb-xs">
               {{ item }}
@@ -63,13 +63,13 @@
 
         <!-- Newsletter -->
         <div class="col-12 col-md-3 q-mb-sm">
-          <div class="text-subtitle2 q-mb-xs">Subscribe</div>
+          <div class="text-subtitle2 midnight-green q-mb-xs">Subscribe</div>
           <div class="text-caption q-mb-xs">
             Get the latest news and articles to your inbox every month.
           </div>
           <q-input dense placeholder="Your email" filled>
             <template #append>
-              <q-btn round dense flat icon="arrow_forward" />
+              <q-btn round dense flat color="teal" icon="arrow_forward" />
             </template>
           </q-input>
         </div>
