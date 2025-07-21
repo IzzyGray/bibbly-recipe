@@ -5,9 +5,9 @@
     <q-header v-if="isSimpleHeader" class="bg-white" elevated>
       <q-toolbar class="justify-between">
         <div class="row items-center cursor-pointer" @click="goToWelcome">
-          <q-avatar icon="restaurant_menu" size="xl" text-color="teal" />
+          <q-avatar icon="collections_bookmark" size="xl" text-color="teal" />
           <q-toolbar-title class="text-center app-title-welcome">
-            bibbly <span class="subtitle app-subtitle-welcome">recipes</span>
+            bibbly
           </q-toolbar-title>
         </div>
         <div class="row items-center q-gutter-sm q-pr-sm">

@@ -1,27 +1,60 @@
 <template>
   <q-page class="welcome-bg column">
-    <div class="column items-center justify-center q-pa-md" style="min-height: calc(100vh - 300px);">
-      <q-card class="q-pa-xl shadow-2 bg-white" style="max-width: 400px; width: 100%; border-radius: 16px;">
-        <q-card-section class="text-center">
-          <q-icon name="restaurant_menu" size="64px" color="teal" />
-          <div class="text-h4 q-mt-md">Willkommen bei Bibbly</div>
-          <div class="text-subtitle1 text-grey-7 q-mt-sm">
-            Deine digitale Rezeptesammlung. Schnell. Einfach. Lecker.
-          </div>
-          <div class="text-body1 q-mt-md">Probiere es jetzt aus</div>
-        </q-card-section>
-
+    <q-carousel v-model="slide" transition-prev="jump-right" transition-next="jump-left" swipeable animated
+      control-color="white" prev-icon="arrow_left" next-icon="arrow_right" navigation-icon="radio_button_unchecked"
+      navigation padding arrows height="500px" class="welcome-carousel">
+      <q-carousel-slide name="style" class="column no-wrap flex-center">
+        <q-icon name="style" size="56px" />
+        <div class="q-mt-md text-center">
+          text 1
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="tv" class="column no-wrap flex-center">
+        <q-icon name="live_tv" size="56px" />
+        <div class="q-mt-md text-center">
+          text 2
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="layers" class="column no-wrap flex-center">
+        <q-icon name="layers" size="56px" />
+        <div class="q-mt-md text-center">
+          text 3
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="map" class="column no-wrap flex-center" img-src="../assets/images/pic5.jpg">
+        <q-icon name="restaurant_menu" size="64px" color="teal" />
+        <div class="q-mt-md text-center">
+          <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to bibbly's recipe collection</div>
+        </div>
+        <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+          Bibbly extracts and organizes your recipe links. <br> It makes them searchable
+          and lets you add your own flavor to them!
+        </div>
+        <div class="text-body1 q-mt-md">Try it now</div>
         <q-form @submit.prevent="submitUrl" class="q-mt-sm">
-          <q-input v-model="demoUrl" label="Rezept-URL eingeben" dense outlined type="url" :rules="[isValidUrl]"
-            class="q-mt-sm">
+          <q-input v-model="demoUrl" label="Enter recipe URL" dense filled bg-color="white" type="url"
+            :rules="[isValidUrl]" class="q-mt-sm">
             <template #append>
               <q-btn flat icon="send" color="teal" @click="submitUrl" />
             </template>
           </q-input>
         </q-form>
+      </q-carousel-slide>
+    </q-carousel>
 
-
-      </q-card>
+    <!-- Description Section -->
+    <div class="q-pa-xl bg-grey-1">
+      <div class="text-center q-mb-md">
+        <div class="app-desc-welcome">Organize your bookmarks</div>
+        <div class="text-subtitle1 text-grey-7 q-mt-sm">
+          Just add a recipe link to your collection. Bibbly extracts
+          all the details, presents them in a clean, unified format. <br>Whether you’re searching by ingredients,
+          category,
+          or
+          cooking time, your personal recipe collection is just a tap away.<br> And best of all: share your Bibbly
+          collection with friends and family – cooking inspiration has never been this easy!
+        </div>
+      </div>
     </div>
 
     <footer class="q-pa-sm q-px-lg q-mt-lg bg-grey-1 text-grey-9">
@@ -89,7 +122,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-auto text-caption text-center text-sm-left">
-          © Skysail Consulting GmbH. All rights reserved.
+          © Skysail Consulting. All rights reserved.
         </div>
 
       </div>
@@ -150,15 +183,21 @@ import { useRouter } from 'vue-router';
 import { Notify } from 'quasar';
 
 
+
 const router = useRouter();
 const demoUrl = ref('');
 const newsletterEmail = ref('');
 const showImpressum = ref(false);
 
 
+
+
 const products = ['Recipe Editor', 'Shopping List', 'Meal Planner']
 const resources = ['Help Center', 'Blog', 'Video Tutorials', 'Community']
 const company = ['About Us', 'Legal Notice', 'Contact', 'Press']
+
+const slide = ref('style') // oder 'tv', 'layers', 'map'
+
 
 function isValidUrl(val: string) {
   const pattern = new RegExp(
@@ -212,9 +251,67 @@ function openImpressum() {
 </script>
 
 <style scoped lang="scss">
-.bg-image {
-  background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1050&q=80');
-  background-size: cover;
-  background-position: center;
+.welcome-page {
+  background-color: #91B494;
+  background-image: url('/src/assets/images/green-grid.svg');
+  background-repeat: repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 1rem;
+}
+
+.welcome-carousel {
+  background-color: #91B494;
+  background-image: url('/src/assets/images/green-grid.svg');
+  background-repeat: repeat;
+
+}
+
+.background-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  overflow: hidden;
+
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.content-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0);
+  padding: 2rem 3rem;
+  border-radius: 0;
+  text-align: center;
+  z-index: 2;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: none;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 </style>

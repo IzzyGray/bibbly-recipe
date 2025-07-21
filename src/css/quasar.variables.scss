@@ -31,6 +31,10 @@ $teal: #087f8c;
 $indian-red: #eb5160;
 $xanthous: #ffba49;
 $mountbatten-pink: #9a7aa0;
+$columbia-blue: #c0d6df;
+$alice-blue: #dbe9ee;
+$celadon: #b8ebd0;
+$grey-white: #fefdff;
 
 .source-link {
   color: $teal;
@@ -79,6 +83,18 @@ $mountbatten-pink: #9a7aa0;
   font-family: 'Inter', cursive;
   font-size: 1.6rem;
   color: $aspargus;
+}
+
+.app-card-title-welcome {
+  font-family: 'Lobster';
+  color: $teal;
+}
+
+.app-desc-welcome {
+  font-family: 'Inter';
+  font-style: italic;
+  font-size: 1.6rem;
+  color: $teal;
 }
 
 .subtitle {
