@@ -4,15 +4,32 @@
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
     <q-header v-if="isSimpleHeader" class="bg-white" elevated>
       <q-toolbar class="justify-between">
-        <div class="row items-center">
-          <q-avatar icon="restaurant_menu" color="teal" text-color="white" />
+        <div class="row items-center cursor-pointer" @click="goToWelcome">
+          <q-avatar icon="restaurant_menu" size="xl" text-color="teal" />
           <q-toolbar-title class="text-center app-title-welcome">
-            bibbly <span class="subtitle">recipes</span>
+            bibbly <span class="subtitle app-subtitle-welcome">recipes</span>
           </q-toolbar-title>
         </div>
         <div class="row items-center q-gutter-sm q-pr-sm">
-          <q-btn flat label="Login" color="primary" @click="goToLogin" />
-          <q-btn flat label="Sign Up" color="teal" @click="goToRegister" />
+          <!-- Desktop: Zwei Buttons -->
+          <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
+            <q-btn flat label="Login" color="primary" @click="goToLogin" />
+            <q-btn flat label="Sign Up" color="teal" @click="goToRegister" />
+          </div>
+
+          <!-- Mobile: Kombinierter Button mit Menü -->
+          <q-btn dense round flat icon="login" color="teal" v-else>
+            <q-menu>
+              <q-list style="min-width: 120px">
+                <q-item clickable v-close-popup @click="goToLogin">
+                  <q-item-section>Login</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="goToRegister">
+                  <q-item-section>Sign Up</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -34,7 +51,7 @@
     </q-header>
 
     <!-- Right Drawer -->
-    <q-drawer v-if="!isSimpleHeader" side="right" v-model="rightDrawerOpen" overlay bordered behavior="desktop">
+    <q-drawer v-if="!isSimpleHeader" side="right" v-model="rightDrawerOpen" overlay bordered behavior="mobile">
       <q-list>
 
         <q-item clickable v-ripple @click="onImport">
@@ -88,23 +105,27 @@ const showBackButton = computed(() =>
   ['recipe-detail'].includes(route.name as string)
 );
 
-const simpleHeaderRoutes = ['welcome', 'login', 'register']
+const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
 
 const isSimpleHeader = computed(() =>
   typeof route.name === 'string' && simpleHeaderRoutes.includes(route.name)
 )
 
-function goBack() {
-  void router.push('/home') // oder router.back()
+async function goToWelcome() {
+  await router.push('/')
 }
 
-function goToLogin() {
-  router.push('/login')
+async function goBack() {
+  await router.push('/home') // oder router.back()
+}
+
+async function goToLogin() {
+  await router.push('/login')
 }
 
 
-function goToRegister() {
-  router.push('/register')
+async function goToRegister() {
+  await router.push('/register')
 }
 
 // Beispielaktionen:

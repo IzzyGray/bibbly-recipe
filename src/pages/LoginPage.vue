@@ -41,10 +41,10 @@ function onSubmit() {
 
   // Dummy-Login: Du kannst hier später echte Authentifizierung einbauen
   if (email.value === 'test@example.com' && password.value === '1234') {
-    $q.notify({ type: 'positive', message: 'Login erfolgreich!' });
+    $q.notify({ type: 'positive', message: 'Login erfolgreich!', color: 'aspargus' });
     void router.push('/home');
   } else {
-    $q.notify({ type: 'negative', message: 'Ungültige Zugangsdaten' });
+    $q.notify({ type: 'negative', message: 'Ungültige Zugangsdaten', color: 'indian-red' });
   }
 }
 </script>

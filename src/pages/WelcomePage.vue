@@ -28,7 +28,7 @@
       <div class="row q-col-gutter-sm q-mb-md items-start justify-start flex-wrap">
         <!-- Logo & Links -->
         <div class="col-12 col-sm-6 col-md-3 q-mb-sm">
-          <div class="text-subtitle2 q-mb-xs">Terms · Privacy Policy</div>
+
         </div>
 
         <!-- Products -->
@@ -55,7 +55,8 @@
         <div class="col-12 col-sm-6 col-md-2 q-mb-sm">
           <div class="text-subtitle2 midnight-green q-mb-xs">Company</div>
           <div class="column no-wrap">
-            <div v-for="item in company" :key="item" class="text-body2 q-mb-xs">
+            <div v-for="item in company" :key="item" class="text-body2 q-mb-xs cursor-pointer"
+              @click="item === 'Legal Notice' ? openImpressum() : null">
               {{ item }}
             </div>
           </div>
@@ -65,11 +66,12 @@
         <div class="col-12 col-md-3 q-mb-sm">
           <div class="text-subtitle2 midnight-green q-mb-xs">Subscribe</div>
           <div class="text-caption q-mb-xs">
-            Get the latest news and articles to your inbox every month.
+            Get the latest news and articles to your inbox.
           </div>
-          <q-input dense placeholder="Your email" filled>
+          <q-input v-model="demoUrl" label="Deine E-Mail Adresse" dense filled type="url" :rules="[isValidEmail]"
+            class="q-mt-sm">
             <template #append>
-              <q-btn round dense flat color="teal" icon="arrow_forward" />
+              <q-btn flat icon="arrow_forward" color="teal" @click="submitEmail" />
             </template>
           </q-input>
         </div>
@@ -79,9 +81,6 @@
 
       <!-- Footer Bottom -->
       <div class="row items-center justify-between q-mt-sm q-gutter-sm">
-        <div class="col-12 col-sm-auto text-caption text-center text-sm-left">
-          © Bibbly.com. All rights reserved.
-        </div>
         <div class="col-12 col-sm-auto flex justify-center justify-sm-end">
           <div class="q-gutter-xs">
             <q-btn flat round icon="language" size="xs" />
@@ -89,14 +88,58 @@
             <q-btn flat round icon="facebook" size="xs" />
           </div>
         </div>
+        <div class="col-12 col-sm-auto text-caption text-center text-sm-left">
+          © Skysail Consulting GmbH. All rights reserved.
+        </div>
+
       </div>
     </footer>
-
-
-
-
-
   </q-page>
+
+  <!-- Impressum Dialog -->
+  <q-dialog v-model="showImpressum" persistent full-width transition-show="fade" transition-hide="fade">
+    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
+      <q-card-section class="row items-center justify-between">
+        <div class="text-h6">Information according to section 5 DDG (Digitale Dienste Gesetz)
+        </div>
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-section class="scroll" style="max-height: 70vh;">
+        <div>
+          <p><strong>Skysail Consulting GmbH</strong></p>
+          <p>
+            Spielwang 7<br />
+            83377 Vachendorf<br />
+            Germany</p>
+
+          <p><strong>Contact:</strong></p>
+          <p>Email: info@skysail.io<br />
+            Phone: + 49 (0) 861 166 267 81</p>
+
+          <p><strong>Managing Director:</strong></p>
+          <p>Carsten Gräf</p>
+
+          <p><strong>Register Entry:</strong></p>
+          <p>Registration in the commercial register.<br />
+            Register court: Commercial Register B Traunstein<br />
+            Register number: HRB 27170</p>
+
+          <p><strong>VAT Number:</strong></p>
+          <p>DE319194915</p>
+        </div>
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-actions align="right">
+        <q-btn flat label="Schließen" color="primary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
 </template>
 
 
@@ -109,11 +152,13 @@ import { Notify } from 'quasar';
 
 const router = useRouter();
 const demoUrl = ref('');
+const newsletterEmail = ref('');
+const showImpressum = ref(false);
 
 
 const products = ['Recipe Editor', 'Shopping List', 'Meal Planner']
 const resources = ['Help Center', 'Blog', 'Video Tutorials', 'Community']
-const company = ['About Us', 'Careers', 'Contact', 'Press']
+const company = ['About Us', 'Legal Notice', 'Contact', 'Press']
 
 function isValidUrl(val: string) {
   const pattern = new RegExp(
@@ -138,6 +183,29 @@ function submitUrl() {
 
   // Beispiel: leite weiter zur Vorschau mit Query-Param
   void router.push({ name: 'preview', query: { url: demoUrl.value } });
+}
+
+function isValidEmail(email: string) {
+
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email)
+}
+
+function submitEmail() {
+  if (!isValidEmail(newsletterEmail.value)) {
+    Notify.create({
+      type: 'negative',
+      message: 'Bitte gib eine gültige E-Mail Adresse ein',
+    });
+    return;
+  }
+
+  // Beispiel: leite weiter zur Bestätigung für die Newsletter-Anmeldung
+  void router.push({ name: 'preview', query: { url: demoUrl.value } });
+}
+
+function openImpressum() {
+  showImpressum.value = true;
 }
 
 

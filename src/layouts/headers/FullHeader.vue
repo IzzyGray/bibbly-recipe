@@ -59,8 +59,8 @@ const showBackButton = computed(() =>
   ['recipe-detail'].includes(route.name as string)
 );
 
-function goBack() {
-  router.push('/home');
+async function goBack() {
+  await router.push('/home');
 }
 
 function onImport() {

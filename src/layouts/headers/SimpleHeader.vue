@@ -17,10 +17,10 @@
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
-function goToLogin() {
-  router.push('/login');
+async function goToLogin() {
+  await router.push('/login');
 }
-function goToRegister() {
-  router.push('/register');
+async function goToRegister() {
+  await router.push('/register');
 }
 </script>

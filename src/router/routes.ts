@@ -35,6 +35,11 @@ const routes: RouteRecordRaw[] = [
         name: 'recipe-detail-legacy',
         component: () => import('pages/RecipeDetail.vue'),
       },
+      {
+        path: '/preview',
+        name: 'preview',
+        component: () => import('pages/RecipePreviewPage.vue'),
+      },
     ],
   },
   {
