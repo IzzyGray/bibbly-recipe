@@ -142,8 +142,10 @@
 
       <q-card-section class="scroll" style="max-height: 70vh;">
         <div>
-          <p><strong>Skysail Consulting GmbH</strong></p>
+          <p><i>This legal notice applies to the online service Bibbly (www.bibbly.io), a product of Skysail
+              Consulting GmbH.</i></p>
           <p>
+            Skysail Consulting GmbH <br>
             Spielwang 7<br />
             83377 Vachendorf<br />
             Germany</p>
