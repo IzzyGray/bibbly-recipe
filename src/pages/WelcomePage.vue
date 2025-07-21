@@ -47,12 +47,11 @@
       <div class="text-center q-mb-md">
         <div class="app-desc-welcome">Organize your bookmarks</div>
         <div class="text-subtitle1 text-grey-7 q-mt-sm">
-          Just add a recipe link to your collection. Bibbly extracts
-          all the details, presents them in a clean, unified format. <br>Whether you’re searching by ingredients,
-          category,
-          or
-          cooking time, your personal recipe collection is just a tap away.<br> And best of all: share your Bibbly
-          collection with friends and family – cooking inspiration has never been this easy!
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.<br>
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.<br>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         </div>
       </div>
     </div>
