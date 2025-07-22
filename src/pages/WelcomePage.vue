@@ -3,39 +3,87 @@
     <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows transition-prev="slide-right"
       transition-next="slide-left" @mouseenter="pauseAutoplay" @mouseleave="resumeAutoplay" swipeable
       control-color="teal" padding height="500px" class="welcome-carousel">
-      <q-carousel-slide name="style" class="column no-wrap flex-center">
-        <q-icon name="style" size="56px" />
-        <div class="q-mt-md text-center">
-          text 1
+      <q-carousel-slide name="style" class="column no-wrap flex-center" img-src="../assets/images/pic30.jpg">
+        <div class="carousel-overlay q-pa-md">
+          <div class="q-mb-md icon-wrapper">
+            <q-icon name="restaurant_menu" size="64px" color="teal" />
+          </div>
+          <div class="q-mt-md text-center">
+            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to your Dining Guide</div>
+          </div>
+          <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+            Turn links into smart, searchable, and personalized <br>collections - plated to your cravings.
+          </div>
+          <div class="text-body1 q-mt-md text-center">Try it now</div>
+          <q-form @submit.prevent="submitUrl" class="q-mt-sm">
+            <q-input v-model="demoUrl" label="Enter a restaurant URL" dense filled bg-color="white" type="url"
+              :rules="[isValidUrl]" class="q-mt-sm">
+              <template #append>
+                <q-btn flat icon="send" color="teal" @click="submitUrl" />
+              </template>
+            </q-input>
+          </q-form>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide name="tv" class="column no-wrap flex-center">
-        <q-icon name="live_tv" size="56px" />
-        <div class="q-mt-md text-center">
-          text 2
+      <q-carousel-slide name="tv" class="column no-wrap flex-center" img-src="../assets/images/pic20.jpg">
+        <div class="carousel-overlay q-pa-md">
+          <div class="q-mb-md icon-wrapper">
+            <q-icon name="beach_access" size="64px" color="teal" />
+          </div>
+          <div class="q-mt-md text-center">
+            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to your Trip Planner</div>
+          </div>
+          <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+            Turn links into smart, searchable, and personalized <br>collections - mapped to your next adventure.
+          </div>
+          <div class="text-body1 q-mt-md text-center">Try it now</div>
+          <q-form @submit.prevent="submitUrl" class="q-mt-sm">
+            <q-input v-model="demoUrl" label="Enter a travel destination URL" dense filled bg-color="white" type="url"
+              :rules="[isValidUrl]" class="q-mt-sm">
+              <template #append>
+                <q-btn flat icon="send" color="teal" @click="submitUrl" />
+              </template>
+            </q-input>
+          </q-form>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide name="layers" class="column no-wrap flex-center">
-        <q-icon name="layers" size="56px" />
-        <div class="q-mt-md text-center">
-          text 3
+      <q-carousel-slide name="layers" class="column no-wrap flex-center" img-src="../assets/images/pic10.jpg">
+        <div class="carousel-overlay q-pa-md">
+          <div class="q-mb-md icon-wrapper">
+            <q-icon name="radio" size="64px" color="teal" />
+          </div>
+          <div class="q-mt-md text-center">
+            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to your News Feed</div>
+          </div>
+          <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+            Turn links into smart, searchable, and personalized <br>collections - filtered to your interests.
+          </div>
+          <div class="text-body1 q-mt-md text-center">Try it now</div>
+          <q-form @submit.prevent="submitUrl" class="q-mt-sm">
+            <q-input v-model="demoUrl" label="Enter a news site URL" dense filled bg-color="white" type="url"
+              :rules="[isValidUrl]" class="q-mt-sm">
+              <template #append>
+                <q-btn flat icon="send" color="teal" @click="submitUrl" />
+              </template>
+            </q-input>
+          </q-form>
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="map" class="column no-wrap flex-center" img-src="../assets/images/pic7.png">
 
         <div class="carousel-overlay q-pa-md">
           <div class="q-mb-md icon-wrapper">
-            <q-icon name="restaurant_menu" size="64px" color="teal" />
+            <q-icon name="outdoor_grill" size="64px" color="teal" />
           </div>
           <div class="q-mt-md text-center">
-            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to Bibbly's Cookbook</div>
+            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to your Recipe Book</div>
           </div>
           <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
-            Turn recipe links into a smart, searchable, and personalized <br>collection - seasoned to your taste.
+            Turn links into smart, searchable, and personalized <br>collections - seasoned to your taste.
           </div>
           <div class="text-body1 q-mt-md text-center">Try it now</div>
           <q-form @submit.prevent="submitUrl" class="q-mt-sm">
-            <q-input v-model="demoUrl" label="Enter recipe URL" dense filled bg-color="white" type="url"
+            <q-input v-model="demoUrl" label="Enter a recipe URL" dense filled bg-color="white" type="url"
               :rules="[isValidUrl]" class="q-mt-sm">
               <template #append>
                 <q-btn flat icon="send" color="teal" @click="submitUrl" />
@@ -203,14 +251,14 @@ const resources = ['Help Center', 'Blog', 'Video Tutorials', 'Community']
 const company = ['About Us', 'Legal Notice', 'Contact', 'Press']
 
 const slide = ref('style') // oder 'tv', 'layers', 'map'
-const autoplay = ref(5000);
+const autoplay = ref(6000);
 
 function pauseAutoplay() {
   autoplay.value = 0
 }
 
 function resumeAutoplay() {
-  autoplay.value = 5000
+  autoplay.value = 6000
 }
 
 

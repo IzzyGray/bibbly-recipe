@@ -14,7 +14,8 @@
           <!-- Desktop: Zwei Buttons -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
             <q-btn flat label="Login" color="teal" @click="goToLogin" />
-            <q-btn style="background: #ff934f; color: white" label="Sign Up" @click="goToRegister" />
+            <q-btn style="background: #ff934f; color: white" label="Sign Up" icon-right="arrow_forward"
+              @click="goToRegister" />
           </div>
 
           <!-- Mobile: Kombinierter Button mit Menü -->
