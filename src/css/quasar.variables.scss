@@ -74,15 +74,27 @@ $grey-white: #fefdff;
 }
 
 .app-title-welcome {
-  font-family: 'Inter', cursive;
-  font-size: 1.6rem;
+  font-family: 'Lobster', cursive;
+
   color: $teal;
+  font-size: 1.6rem; // Bibbly – ggf. auch 1.4rem
+  font-weight: 700; // Klarer Markenfokus
+  line-height: 1.2;
 }
 
 .app-subtitle-welcome {
-  font-family: 'Inter', cursive;
-  font-size: 1.6rem;
-  color: $aspargus;
+  font-family: 'Inter';
+  font-size: 1rem; // kleiner als Haupttitel
+  font-weight: 400;
+  margin-left: 0.25rem;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  // für kleinere Bildschirme Untertitel ausblednen oder kleiner machen
+  .app-subtitle-welcome {
+    display: none;
+  }
 }
 
 .app-card-title-welcome {
@@ -92,7 +104,7 @@ $grey-white: #fefdff;
 
 .app-desc-welcome {
   font-family: 'Inter';
-  font-style: italic;
+
   font-size: 1.6rem;
   color: $teal;
 }

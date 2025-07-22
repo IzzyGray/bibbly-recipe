@@ -1,8 +1,8 @@
 <template>
   <q-page class="welcome-bg column">
-    <q-carousel v-model="slide" transition-prev="jump-right" transition-next="jump-left" swipeable animated
-      control-color="white" prev-icon="arrow_left" next-icon="arrow_right" navigation-icon="radio_button_unchecked"
-      navigation padding arrows height="500px" class="welcome-carousel">
+    <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows transition-prev="slide-right"
+      transition-next="slide-left" @mouseenter="pauseAutoplay" @mouseleave="resumeAutoplay" swipeable
+      control-color="teal" padding height="500px" class="welcome-carousel">
       <q-carousel-slide name="style" class="column no-wrap flex-center">
         <q-icon name="style" size="56px" />
         <div class="q-mt-md text-center">
@@ -21,31 +21,35 @@
           text 3
         </div>
       </q-carousel-slide>
-      <q-carousel-slide name="map" class="column no-wrap flex-center" img-src="../assets/images/pic5.jpg">
-        <q-icon name="restaurant_menu" size="64px" color="teal" />
-        <div class="q-mt-md text-center">
-          <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to bibbly's recipe collection</div>
+      <q-carousel-slide name="map" class="column no-wrap flex-center" img-src="../assets/images/pic7.png">
+
+        <div class="carousel-overlay q-pa-md">
+          <div class="q-mb-md icon-wrapper">
+            <q-icon name="restaurant_menu" size="64px" color="teal" />
+          </div>
+          <div class="q-mt-md text-center">
+            <div class="text-h4 q-mt-md app-card-title-welcome">Welcome to Bibbly's Cookbook</div>
+          </div>
+          <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+            Turn recipe links into a smart, searchable, and personalized <br>collection - seasoned to your taste.
+          </div>
+          <div class="text-body1 q-mt-md text-center">Try it now</div>
+          <q-form @submit.prevent="submitUrl" class="q-mt-sm">
+            <q-input v-model="demoUrl" label="Enter recipe URL" dense filled bg-color="white" type="url"
+              :rules="[isValidUrl]" class="q-mt-sm">
+              <template #append>
+                <q-btn flat icon="send" color="teal" @click="submitUrl" />
+              </template>
+            </q-input>
+          </q-form>
         </div>
-        <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
-          Bibbly extracts and organizes your recipe links. <br> It makes them searchable
-          and lets you add your own flavor to them!
-        </div>
-        <div class="text-body1 q-mt-md">Try it now</div>
-        <q-form @submit.prevent="submitUrl" class="q-mt-sm">
-          <q-input v-model="demoUrl" label="Enter recipe URL" dense filled bg-color="white" type="url"
-            :rules="[isValidUrl]" class="q-mt-sm">
-            <template #append>
-              <q-btn flat icon="send" color="teal" @click="submitUrl" />
-            </template>
-          </q-input>
-        </q-form>
       </q-carousel-slide>
     </q-carousel>
 
     <!-- Description Section -->
     <div class="q-pa-xl bg-grey-1">
       <div class="text-center q-mb-md">
-        <div class="app-desc-welcome">Organize your bookmarks</div>
+        <div class="app-desc-welcome">The Smarter Way to Save the Web</div>
         <div class="text-subtitle1 text-grey-7 q-mt-sm">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua.<br>
@@ -121,7 +125,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-auto text-caption text-center text-sm-left">
-          © Skysail Consulting. All rights reserved.
+          © Skysail Consulting GmbH. All rights reserved.
         </div>
 
       </div>
@@ -193,11 +197,21 @@ const showImpressum = ref(false);
 
 
 
+
 const products = ['Recipe Editor', 'Shopping List', 'Meal Planner']
 const resources = ['Help Center', 'Blog', 'Video Tutorials', 'Community']
 const company = ['About Us', 'Legal Notice', 'Contact', 'Press']
 
 const slide = ref('style') // oder 'tv', 'layers', 'map'
+const autoplay = ref(5000);
+
+function pauseAutoplay() {
+  autoplay.value = 0
+}
+
+function resumeAutoplay() {
+  autoplay.value = 5000
+}
 
 
 function isValidUrl(val: string) {
@@ -252,67 +266,29 @@ function openImpressum() {
 </script>
 
 <style scoped lang="scss">
-.welcome-page {
+.welcome-carousel {
   background-color: #91B494;
-  background-image: url('/src/assets/images/green-grid.svg');
-  background-repeat: repeat;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+
+}
+
+.carousel-overlay {
+  background-color: rgba(255, 255, 255, 0.7);
+  /* halbtransparent weiß */
+  border-radius: 5px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+
+}
+
+.icon-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
-  padding: 1rem;
-}
-
-.welcome-carousel {
-  background-color: #91B494;
-  background-image: url('/src/assets/images/green-grid.svg');
-  background-repeat: repeat;
-
-}
-
-.background-wrapper {
-  position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 500px;
-  overflow: hidden;
-
-}
-
-.background-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.content-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0);
-  padding: 2rem 3rem;
-  border-radius: 0;
-  text-align: center;
-  z-index: 2;
-  width: 80%;
-  max-width: 600px;
-  box-shadow: none;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin: 0 0 1rem;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 1.5rem;
 }
 </style>

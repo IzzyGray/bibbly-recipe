@@ -3,18 +3,18 @@
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
     <q-header v-if="isSimpleHeader" class="bg-white" elevated>
-      <q-toolbar class="justify-between">
+      <q-toolbar class="justify-between q-py-md">
         <div class="row items-center cursor-pointer" @click="goToWelcome">
-          <q-avatar icon="collections_bookmark" size="xl" text-color="teal" />
+          <img src="../assets/images/logo.png" alt="Bibbly Logo" class="logo-image" />
           <q-toolbar-title class="text-center app-title-welcome">
-            bibbly
+            Bibbly <span class="app-subtitle-welcome">Your Smart Link Collection</span>
           </q-toolbar-title>
         </div>
         <div class="row items-center q-gutter-sm q-pr-sm">
           <!-- Desktop: Zwei Buttons -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
-            <q-btn flat label="Login" color="primary" @click="goToLogin" />
-            <q-btn flat label="Sign Up" color="teal" @click="goToRegister" />
+            <q-btn flat label="Login" color="teal" @click="goToLogin" />
+            <q-btn style="background: #ff934f; color: white" label="Sign Up" @click="goToRegister" />
           </div>
 
           <!-- Mobile: Kombinierter Button mit Menü -->
@@ -151,4 +151,9 @@ function onLogout() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.logo-image {
+  height: 30px;
+  object-fit: contain;
+}
+</style>
