@@ -4,6 +4,7 @@
       transition-next="slide-left" @mouseenter="pauseAutoplay" @mouseleave="resumeAutoplay" swipeable
       control-color="teal" padding height="500px" class="welcome-carousel">
       <q-carousel-slide name="style" class="column no-wrap flex-center" img-src="../assets/images/pic30.jpg">
+        <div class="slide-overlay"></div> <!-- neuer Overlay -->
         <div class="carousel-overlay q-pa-md">
           <div class="q-mb-md icon-wrapper">
             <q-icon name="restaurant_menu" size="64px" color="teal" />
@@ -26,6 +27,7 @@
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="tv" class="column no-wrap flex-center" img-src="../assets/images/pic20.jpg">
+        <div class="slide-overlay"></div> <!-- neuer Overlay -->
         <div class="carousel-overlay q-pa-md">
           <div class="q-mb-md icon-wrapper">
             <q-icon name="beach_access" size="64px" color="teal" />
@@ -48,6 +50,7 @@
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="layers" class="column no-wrap flex-center" img-src="../assets/images/pic10.jpg">
+        <div class="slide-overlay"></div> <!-- neuer Overlay -->
         <div class="carousel-overlay q-pa-md">
           <div class="q-mb-md icon-wrapper">
             <q-icon name="radio" size="64px" color="teal" />
@@ -70,7 +73,7 @@
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="map" class="column no-wrap flex-center" img-src="../assets/images/pic7.png">
-
+        <div class="slide-overlay"></div> <!-- neuer Overlay -->
         <div class="carousel-overlay q-pa-md">
           <div class="q-mb-md icon-wrapper">
             <q-icon name="outdoor_grill" size="64px" color="teal" />
@@ -99,11 +102,9 @@
       <div class="text-center q-mb-md">
         <div class="app-desc-welcome">The Smarter Way to Save the Web</div>
         <div class="text-subtitle1 text-grey-7 q-mt-sm">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.<br>
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.<br>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          The links you save are more than just URLs — they reflect your curiosity, your taste, and your intent.<br>
+          Collected together, they form a curated mosaic of meaning — uniquely yours.<br>
+          And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
       </div>
     </div>
@@ -324,7 +325,7 @@ function openImpressum() {
 }
 
 .carousel-overlay {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   /* halbtransparent weiß */
   border-radius: 5px;
   padding: 2rem;
@@ -338,5 +339,19 @@ function openImpressum() {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 100, 80, 0.2); // Farbe + Transparenz
+  mix-blend-mode: multiply;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.carousel-overlay {
+  position: relative; // stellt sicher, dass es über dem Overlay liegt
+  z-index: 2;
 }
 </style>
