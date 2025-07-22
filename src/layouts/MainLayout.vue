@@ -2,7 +2,7 @@
   <q-layout view="hHh pR fFf">
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
-    <q-header v-if="isSimpleHeader" class="bg-white" elevated>
+    <q-header v-if="isSimpleHeader" class="bg-white">
       <q-toolbar class="justify-between q-py-md">
         <div class="row items-center cursor-pointer" @click="goToWelcome">
           <img src="../assets/images/logo.png" alt="Bibbly Logo" class="logo-image" />
