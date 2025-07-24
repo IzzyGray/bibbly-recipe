@@ -68,26 +68,14 @@ $grey-white: #fefdff;
   color: $indian-red;
 }
 
-.app-title {
+.app-logo-text {
   font-family: 'Inter', cursive;
-  font-size: 1.6rem;
-}
-
-.app-title-welcome {
-  font-family: 'Lobster', cursive;
-
-  color: $teal;
-  font-size: 1.6rem; // Bibbly – ggf. auch 1.4rem
-  font-weight: 700; // Klarer Markenfokus
+  color: #191919;
+  font-size: 1.8rem;
+  font-weight: 700;
   line-height: 1.2;
-}
-
-.app-subtitle-welcome {
-  font-family: 'Inter';
-  font-size: 1rem; // kleiner als Haupttitel
-  font-weight: 400;
-  margin-left: 0.25rem;
-  color: #666;
+  text-align: center;
+  letter-spacing: 0.12rem;
 }
 
 @media (max-width: 600px) {
@@ -98,15 +86,51 @@ $grey-white: #fefdff;
 }
 
 .app-card-title-welcome {
-  font-family: 'Lobster';
-  color: $teal;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  color: #191919;
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1.25;
+  text-align: center;
+  letter-spacing: -0.01rem;
 }
 
 .app-desc-welcome {
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
 
-  font-size: 1.6rem;
-  color: $teal;
+.gradient-text {
+  background: linear-gradient(to right, #087f8c, #698f3f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-desc-text-welcome {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: grey;
+}
+
+.app-ext-welcome {
+  font-family: 'Inter', sans-serif;
+
+  font-size: 2.625rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.app-ext-text-welcome {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: grey;
 }
 
 .subtitle {

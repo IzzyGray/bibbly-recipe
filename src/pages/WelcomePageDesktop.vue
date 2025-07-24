@@ -1,45 +1,80 @@
 <template>
   <q-page class="welcome-bg column">
-
-    <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows transition-prev="slide-right"
-      transition-next="slide-left" swipeable control-color="teal" height="500px" class="welcome-carousel">
-      <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="item.name" :img-src="item.img"
-        class="column no-wrap flex-center">
-        <div class="slide-overlay" />
-        <div class="carousel-overlay q-pa-md">
-          <div class="q-mb-md icon-wrapper">
-            <q-icon :name="item.icon" size="64px" color="teal" />
-          </div>
-          <div class="q-mt-md text-center">
-            <div class="text-h4 q-mt-md app-card-title-welcome">{{ item.title }}</div>
-          </div>
-          <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
-            {{ item.subtitle }}
-          </div>
-          <div class="text-body1 q-mt-md text-center">Try it now</div>
-          <q-form @submit.prevent="submitUrl" class="q-mt-sm">
-            <q-input v-model="demoUrl" :label="item.inputLabel" dense filled bg-color="white" type="url"
-              :rules="[isValidUrl]" class="q-mt-sm">
-              <template #append>
-                <q-btn flat icon="send" color="teal" @click="submitUrl" />
-              </template>
-            </q-input>
-          </q-form>
-        </div>
-      </q-carousel-slide>
-    </q-carousel>
-
-    <!-- Description Section -->
-    <div class="q-pa-xl bg-grey-1">
-      <div class="text-center q-mb-md">
-        <div class="app-desc-welcome">The Smarter Way to Save the Web</div>
-        <div class="text-subtitle1 text-grey-7 q-mt-sm">
+    <div class="q-pa-xl bg-white">
+      <div class="text-center q-mb-md q-mt-xl">
+        <div class="app-desc-welcome">Bookmarks, But <span class="gradient-text">Better</span></div>
+        <div class="app-desc-text-welcome q-mt-lg">
           The links you save are more than just URLs — they reflect your curiosity, your taste, and your intent.<br>
           Collected together, they form a curated mosaic of meaning — uniquely yours.<br>
           And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
+        <div class="row justify-center q-gutter-sm q-mt-xl">
+          <q-btn style="background: #698f3f; color: white" unelevated class="text-capitalize q-mr-sm"
+            @click="goToRegister">
+            <span style="font-size: 1rem;">
+              Start free trial
+            </span>
+          </q-btn>
+
+          <q-btn style="background: #191919; color: white" class="text-capitalize q-ml-sm">
+            <span style="font-size: 1rem;">
+              Learn more
+            </span>
+          </q-btn>
+        </div>
       </div>
     </div>
+
+    <!-- Carousel Section -->
+    <div class="q-pa-md flex flex-center">
+      <div style="max-width: 900px; width: 100%;">
+        <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows
+          transition-prev="slide-right" transition-next="slide-left" swipeable control-color="teal" height="500px"
+          class="welcome-carousel">
+          <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="item.name" :img-src="item.img"
+            class="column no-wrap flex-center">
+            <div class="slide-overlay" />
+            <div class="carousel-overlay q-pa-md">
+              <div class="q-mb-md icon-wrapper">
+                <q-icon :name="item.icon" size="64px" color="teal" />
+              </div>
+              <div class="q-mt-md text-center">
+                <div class="text-h4 q-mt-md app-card-title-welcome">{{ item.title }}</div>
+              </div>
+              <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
+                {{ item.subtitle }}
+              </div>
+              <div class="text-body1 q-mt-md text-center">Try it now</div>
+              <q-form @submit.prevent="submitUrl" class="q-mt-sm">
+                <q-input v-model="demoUrl" :label="item.inputLabel" dense filled bg-color="white" type="url"
+                  :rules="[isValidUrl]" class="q-mt-sm">
+                  <template #append>
+                    <q-btn flat icon="send" color="teal" @click="submitUrl" />
+                  </template>
+                </q-input>
+              </q-form>
+            </div>
+          </q-carousel-slide>
+        </q-carousel>
+      </div>
+    </div>
+
+
+    <!-- Download Extension Section -->
+    <div class="q-pa-xl bg-grey-1 text-center">
+      <div class="app-ext-welcome q-mb-sm">
+        Save Links with the bibbly Extension
+      </div>
+
+      <div class="app-ext-text-welcome q-mb-md">
+        Install the bibbly browser extension to add links in just one click - from any website, at any time.<br />
+        Everything you save is instantly added to your collection - no copy-paste, no hassle.
+      </div>
+
+      <q-btn label="Get the Extension" icon="extension" style="background: #698f3f; color: white" unelevated size="md"
+        class="q-mt-sm text-capitalize" @click="goToExtension" />
+    </div>
+
 
     <!-- Footer -->
 
@@ -109,7 +144,7 @@
             </div>
           </div>
           <div class="col-12 col-sm-auto text-caption text-center text-sm-left">
-            © Skysail Consulting GmbH. All rights reserved.
+            © 2025 Skysail Consulting GmbH. All rights reserved.
           </div>
 
         </div>
@@ -121,8 +156,11 @@
       <div class="q-mb-md" v-else>
         <!-- Linkzeile -->
         <div class="row items-center justify-center q-gutter-md text-caption q-mt-sm">
+          <div class="cursor-pointer">Contact</div>
           <div class="cursor-pointer" @click="openImpressum()">Legal Notice</div>
-          <div class="cursor-pointer">About</div>
+          <div class="cursor-pointer">Disclaimer</div>
+          <div class="cursor-pointer">Privacy</div>
+
         </div>
 
         <!-- Trennlinie -->
@@ -200,12 +238,12 @@ const demoUrl = ref('');
 const newsletterEmail = ref('');
 const showImpressum = ref(false);
 
-const products = ['Recipe Editor', 'Shopping List', 'Meal Planner']
-const resources = ['Help Center', 'Blog', 'Video Tutorials', 'Community']
+const products = ['Trip Planner', 'News Feed', 'Recipe Book', 'Dining Guide']
+const resources = ['Help Center', 'Video Tutorials']
 const company = ['About Us', 'Legal Notice', 'Privacy', 'Contact']
 
 const slide = ref('style')
-const autoplay = ref(6000)
+const autoplay = ref(8000)
 
 const slides = [
   {
@@ -241,6 +279,10 @@ const slides = [
     inputLabel: 'Enter a recipe URL'
   }
 ]
+
+async function goToRegister() {
+  await router.push('/register')
+}
 
 function openImpressum() {
   showImpressum.value = true;
@@ -287,6 +329,10 @@ function submitEmail() {
 
   // Beispiel: leite weiter zur Bestätigung für die Newsletter-Anmeldung
   void router.push({ name: 'preview', query: { url: demoUrl.value } });
+}
+
+function goToExtension() {
+  window.open('https://example.com/extension', '_blank') // ← hier den echten Link einfügen
 }
 
 </script>

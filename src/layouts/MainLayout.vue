@@ -2,20 +2,29 @@
   <q-layout view="hHh pR fFf">
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
-    <q-header v-if="isSimpleHeader" class="bg-white">
+    <q-header v-if="isSimpleHeader" class="bg-transparent-header">
       <q-toolbar class="justify-between q-py-md">
-        <div class="row items-center cursor-pointer" @click="goToWelcome">
+        <div class="row items-center cursor-pointer q-ml-xl" @click="goToWelcome">
+
           <img src="../assets/images/logo.png" alt="Bibbly Logo" class="logo-image" />
-          <q-toolbar-title class="text-center app-title-welcome">
-            Bibbly <span class="app-subtitle-welcome">Your Smart Link Collection</span>
+          <q-toolbar-title class="app-logo-text">
+            bibbly.
           </q-toolbar-title>
         </div>
-        <div class="row items-center q-gutter-sm q-pr-sm">
+        <div class="row items-center q-gutter-sm q-pr-sm q-mr-xl">
           <!-- Desktop: Zwei Buttons -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
-            <q-btn flat label="Login" color="teal" @click="goToLogin" />
-            <q-btn style="background: #ff934f; color: white" label="Sign Up" icon-right="arrow_forward"
-              @click="goToRegister" />
+            <q-btn flat size="lg" style="color:#191919" class="text-capitalize" @click="goToLogin">
+              <span style="font-size: 1rem;">
+                Login
+              </span>
+            </q-btn>
+            <q-btn size="md" style="background: #698f3f; color: white" class="text-capitalize" @click="goToRegister">
+              <span style="font-size: 1rem;">
+                Sign Up
+              </span>
+              <q-icon name="arrow_forward" size="16px" class="q-ml-sm" />
+            </q-btn>
           </div>
 
           <!-- Mobile: Kombinierter Button mit Menü -->
@@ -153,6 +162,13 @@ function onLogout() {
 </script>
 
 <style scoped>
+.bg-transparent-header {
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Weiß mit 80% Deckkraft */
+  backdrop-filter: blur(10px);
+  /* optional für Glassmokeffekt */
+}
+
 .logo-image {
   height: 30px;
   object-fit: contain;

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 export default defineConfig((ctx) => {
   return {
     htmlVariables: {
-      productName: 'bibbly | smart links',
+      productName: 'bibbly | bookmarks, but better',
     },
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
