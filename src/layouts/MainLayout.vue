@@ -19,7 +19,7 @@
                 Login
               </span>
             </q-btn>
-            <q-btn size="md" style="background: #698f3f; color: white" class="text-capitalize" @click="goToRegister">
+            <q-btn size="md" color="secondary" class="text-capitalize" @click="goToRegister">
               <span style="font-size: 1rem;">
                 Sign Up
               </span>
@@ -28,7 +28,7 @@
           </div>
 
           <!-- Mobile: Kombinierter Button mit Menü -->
-          <q-btn dense round flat icon="login" color="teal" v-else>
+          <q-btn dense round flat icon="login" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
                 <q-item clickable v-close-popup @click="goToLogin">

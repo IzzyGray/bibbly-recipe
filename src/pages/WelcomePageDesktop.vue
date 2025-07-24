@@ -11,8 +11,7 @@
           And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
         <div class="row justify-center q-gutter-sm q-mt-xl">
-          <q-btn style="background: #698f3f; color: white" unelevated class="text-capitalize q-mr-sm"
-            @click="goToRegister">
+          <q-btn color="secondary" unelevated class="text-capitalize q-mr-sm" @click="goToRegister">
             <span style="font-size: 1rem;">
               Start free trial
             </span>
@@ -34,21 +33,21 @@
         <!-- Neue Überschrift + Beschreibung -->
         <div class="text-center q-mb-lg">
           <div class="app-ext-welcome">
-            Explore the Widgets
+            Explore Your Collections
           </div>
           <div class="app-ext-text-welcome q-mt-sm">
             Choose from a variety of smart link collections tailored to your interests - and try them instantly.
           </div>
         </div>
         <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows
-          transition-prev="slide-right" transition-next="slide-left" swipeable control-color="teal" height="500px"
+          transition-prev="slide-right" transition-next="slide-left" swipeable control-color="secondary" height="500px"
           class="welcome-carousel">
           <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="item.name" :img-src="item.img"
             class="column no-wrap flex-center">
             <div class="slide-overlay" />
             <div class="carousel-overlay q-pa-md">
               <div class="q-mb-md icon-wrapper">
-                <q-icon :name="item.icon" size="50px" color="teal" />
+                <q-icon :name="item.icon" size="50px" color="primary" />
               </div>
               <div class="q-mt-md text-center">
                 <div class="q-mt-md app-card-title-welcome">{{ item.title }}</div>
@@ -61,7 +60,7 @@
                 <q-input v-model="demoUrl" :label="item.inputLabel" dense filled bg-color="white" type="url"
                   :rules="[isValidUrl]" class="q-mt-sm">
                   <template #append>
-                    <q-btn flat icon="send" color="teal" @click="submitUrl" />
+                    <q-btn flat icon="send" color="secondary" @click="submitUrl" />
                   </template>
                 </q-input>
               </q-form>
@@ -84,7 +83,7 @@
         Everything you save is instantly added to your collection - no copy-paste, no hassle.
       </div>
 
-      <q-btn label="Get the Extension" icon="extension" style="background: #698f3f; color: white" unelevated size="md"
+      <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
         class="q-mt-sm text-capitalize" @click="goToExtension" />
     </div>
   </q-page>

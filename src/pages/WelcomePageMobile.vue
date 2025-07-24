@@ -13,8 +13,7 @@
           And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
         <div class="row justify-center q-gutter-sm q-mt-xl">
-          <q-btn style="background: #698f3f; color: white" unelevated class="text-capitalize q-mr-sm"
-            @click="goToRegister">
+          <q-btn color="secondary" unelevated class="text-capitalize q-mr-sm" @click="goToRegister">
             <span style="font-size: 1rem;">Start free trial</span>
           </q-btn>
 
@@ -27,38 +26,39 @@
 
     <!-- Cards Section (statt Carousel) -->
     <div class="q-pa-md">
-
-      <!-- Neue Überschrift + Text -->
       <div class="text-center q-mb-lg">
         <div class="app-ext-welcome">
-          Explore Your Widgets
+          Explore Your Collections
         </div>
-        <div class="app-ext-text-welcome q-mt-xs">
+        <div class="text-subtitle2 text-grey-7 q-mt-xs">
           Choose from a variety of smart link collections tailored to your interests - and try them instantly.
         </div>
       </div>
 
-      <div class="column q-gutter-md">
-        <q-card v-for="(item, index) in slides" :key="index" class="q-pa-md" flat bordered>
-          <div class="column items-center">
-            <q-icon :name="item.icon" size="48px" color="teal" />
-            <div class="app-card-title-welcome q-mt-md">{{ item.title }}</div>
-            <div class="text-subtitle2 text-grey-7 text-center q-mt-sm">
-              {{ item.subtitle }}
+      <q-carousel v-model="activeSlide" animated swipeable navigation padding control-color="secondary" height="auto"
+        arrows>
+        <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="index" class="q-pa-sm">
+          <q-card flat bordered class="q-pa-md">
+            <div class="column items-center">
+              <q-icon :name="item.icon" size="48px" color="primary" />
+              <div class="app-card-title-welcome q-mt-md">{{ item.title }}</div>
+              <div class="text-subtitle2 text-grey-7 text-center q-mt-sm">
+                {{ item.subtitle }}
+              </div>
+              <q-form @submit.prevent="submitUrl" class="full-width q-mt-md">
+                <q-input v-model="demoUrl" :label="item.inputLabel" dense filled bg-color="grey-2" type="url"
+                  :rules="[isValidUrl]">
+                  <template #append>
+                    <q-btn flat icon="send" color="secondary" @click="submitUrl" />
+                  </template>
+                </q-input>
+              </q-form>
             </div>
-
-            <q-form @submit.prevent="submitUrl" class="full-width q-mt-md">
-              <q-input v-model="demoUrl" :label="item.inputLabel" dense filled bg-color="grey-2" type="url"
-                :rules="[isValidUrl]">
-                <template #append>
-                  <q-btn flat icon="send" color="teal" @click="submitUrl" />
-                </template>
-              </q-input>
-            </q-form>
-          </div>
-        </q-card>
-      </div>
+          </q-card>
+        </q-carousel-slide>
+      </q-carousel>
     </div>
+
 
     <!-- Download Extension Section -->
     <div class="q-pa-xl bg-grey-1 text-center">
@@ -71,7 +71,7 @@
         Everything you save is instantly added to your collection – no copy-paste, no hassle.
       </div>
 
-      <q-btn label="Get the Extension" icon="extension" style="background: #698f3f; color: white" unelevated size="md"
+      <q-btn label="Get the Extension" icon="extension" style="background: primary; color: white" unelevated size="md"
         class="q-mt-sm text-capitalize" @click="goToExtension" />
     </div>
   </q-page>
@@ -88,6 +88,7 @@ import Pic7 from 'src/assets/images/pic7.png'
 
 const router = useRouter()
 const demoUrl = ref('')
+const activeSlide = ref(0) // für v-model im q-carousel
 
 const slides = [
   {

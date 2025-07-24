@@ -111,7 +111,7 @@ $grey-white: #fefdff;
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #087f8c, #698f3f);
+  background: linear-gradient(to right, $teal, $aspargus);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
