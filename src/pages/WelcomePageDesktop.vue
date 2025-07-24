@@ -1,11 +1,13 @@
 <template>
   <q-page class="welcome-bg column">
+
+    <!-- Intro Section -->
     <div class="q-pa-xl bg-white">
       <div class="text-center q-mb-md q-mt-xl">
         <div class="app-desc-welcome">Bookmarks, But <span class="gradient-text">Better</span></div>
         <div class="app-desc-text-welcome q-mt-lg">
-          The links you save are more than just URLs — they reflect your curiosity, your taste, and your intent.<br>
-          Collected together, they form a curated mosaic of meaning — uniquely yours.<br>
+          The links you save are more than just URLs - they reflect your curiosity, your taste, and your intent.<br>
+          Collected together, they form a curated mosaic of meaning - uniquely yours.<br>
           And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
         <div class="row justify-center q-gutter-sm q-mt-xl">
@@ -28,6 +30,16 @@
     <!-- Carousel Section -->
     <div class="q-pa-md flex flex-center">
       <div style="max-width: 900px; width: 100%;">
+
+        <!-- Neue Überschrift + Beschreibung -->
+        <div class="text-center q-mb-lg">
+          <div class="app-ext-welcome">
+            Explore the Widgets
+          </div>
+          <div class="app-ext-text-welcome q-mt-sm">
+            Choose from a variety of smart link collections tailored to your interests - and try them instantly.
+          </div>
+        </div>
         <q-carousel animated v-model="slide" navigation infinite :autoplay="autoplay" arrows
           transition-prev="slide-right" transition-next="slide-left" swipeable control-color="teal" height="500px"
           class="welcome-carousel">
@@ -36,10 +48,10 @@
             <div class="slide-overlay" />
             <div class="carousel-overlay q-pa-md">
               <div class="q-mb-md icon-wrapper">
-                <q-icon :name="item.icon" size="64px" color="teal" />
+                <q-icon :name="item.icon" size="50px" color="teal" />
               </div>
               <div class="q-mt-md text-center">
-                <div class="text-h4 q-mt-md app-card-title-welcome">{{ item.title }}</div>
+                <div class="q-mt-md app-card-title-welcome">{{ item.title }}</div>
               </div>
               <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
                 {{ item.subtitle }}
@@ -56,6 +68,7 @@
             </div>
           </q-carousel-slide>
         </q-carousel>
+
       </div>
     </div>
 

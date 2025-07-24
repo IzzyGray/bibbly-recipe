@@ -107,12 +107,12 @@
         </div>
 
         <div class="row q-gutter-md justify-center">
-          <q-btn flat dense label="FAQ" class="text-capitalize text-grey-6" />
-          <q-btn flat dense label="Legal Notice" class="text-capitalize text-grey-6" @click="openImpressum" />
-          <q-btn flat dense label="Privacy" class="text-capitalize text-grey-6" />
-          <q-btn flat dense label="Disclaimer" class="text-capitalize text-grey-6" />
-          <q-btn flat dense label="About" class="text-capitalize text-grey-6" />
-          <q-btn flat dense label="Contact" class="text-capitalize text-grey-6" />
+          <q-btn flat dense label="FAQ" class="text-capitalize text-caption" />
+          <q-btn flat dense label="Legal Notice" class="text-capitalize text-caption" @click="openImpressum" />
+          <q-btn flat dense label="Privacy" class="text-capitalize text-caption" />
+          <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" />
+          <q-btn flat dense label=" About" class="text-capitalize text-caption" />
+          <q-btn flat dense label="Contact" class="text-capitalize text-caption" />
         </div>
         <!-- Trennlinie -->
         <q-separator spaced class="q-mt-md" />

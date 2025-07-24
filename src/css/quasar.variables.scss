@@ -104,6 +104,12 @@ $grey-white: #fefdff;
   letter-spacing: 0.01em;
 }
 
+@media (max-width: 430px) {
+  .app-desc-welcome {
+    font-size: 2rem;
+  }
+}
+
 .gradient-text {
   background: linear-gradient(to right, #087f8c, #698f3f);
   -webkit-background-clip: text;
@@ -113,8 +119,14 @@ $grey-white: #fefdff;
 .app-desc-text-welcome {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: grey;
+}
+
+@media (max-width: 430px) {
+  .app-desc-text-welcome {
+    font-size: 0.9rem;
+  }
 }
 
 .app-ext-welcome {
@@ -126,11 +138,23 @@ $grey-white: #fefdff;
   letter-spacing: 0.01em;
 }
 
+@media (max-width: 430px) {
+  .app-ext-welcome {
+    font-size: 1.3rem;
+  }
+}
+
 .app-ext-text-welcome {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   color: grey;
+}
+
+@media (max-width: 430px) {
+  .app-ext-text-welcome {
+    font-size: 0.7rem;
+  }
 }
 
 .subtitle {
