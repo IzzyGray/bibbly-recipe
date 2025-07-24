@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh pR fFf">
+  <q-layout view="hHh lpR fFf">
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
     <q-header v-if="isSimpleHeader" class="bg-transparent-header">
@@ -79,7 +79,7 @@
           <q-item-section>AGB</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple @click="onImpressum">
+        <q-item clickable v-ripple @click="openImpressum">
           <q-item-section avatar><q-icon name="info" /></q-item-section>
           <q-item-section>Impressum</q-item-section>
         </q-item>
@@ -98,8 +98,104 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <footer class="q-pa-sm q-px-lg q-mt-lg bg-grey-1 text-grey-9">
+
+      <!-- Desktop/Footer links horizontal -->
+      <div v-if="$q.screen.gt.sm" class="column items-center q-mb-md">
+        <div class="text-subtitle1 text-uppercase text-grey-6 text-weight-bold q-mb-sm">
+          Where to?
+        </div>
+
+        <div class="row q-gutter-md justify-center">
+          <q-btn flat dense label="FAQ" class="text-capitalize text-grey-6" />
+          <q-btn flat dense label="Legal Notice" class="text-capitalize text-grey-6" @click="openImpressum" />
+          <q-btn flat dense label="Privacy" class="text-capitalize text-grey-6" />
+          <q-btn flat dense label="Disclaimer" class="text-capitalize text-grey-6" />
+          <q-btn flat dense label="About" class="text-capitalize text-grey-6" />
+          <q-btn flat dense label="Contact" class="text-capitalize text-grey-6" />
+        </div>
+        <!-- Trennlinie -->
+        <q-separator spaced class="q-mt-md" />
+
+        <!-- Copyright -->
+        <div class="row justify-end q-px-md q-mt-sm full-width">
+          <div class="text-caption text-grey-5 text-right">
+            © 2025 Skysail Consulting GmbH. All rights reserved.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile/Tablet/Footer links vertikal -->
+      <div v-else class="column items-center q-mb-md text-center">
+        <!-- Titel -->
+        <div class="text-subtitle2 text-uppercase text-grey-6 text-weight-bold q-mb-sm">
+          Where to?
+        </div>
+
+        <!-- Vertikale Linkliste -->
+        <div class="column items-center text-caption q-gutter-xs">
+          <div class="cursor-pointer">Contact</div>
+          <div class="cursor-pointer" @click="openImpressum()">Legal Notice</div>
+          <div class="cursor-pointer">Disclaimer</div>
+          <div class="cursor-pointer">Privacy</div>
+        </div>
+        <!-- Trennlinie -->
+        <q-separator spaced class="q-mt-md" />
+
+        <!-- Copyright -->
+        <div class="text-caption text-grey-5 text-center q-mt-xs">
+          © 2025 Skysail Consulting GmbH. All rights reserved.
+        </div>
+      </div>
+
+    </footer>
 
   </q-layout>
+  <!-- Impressum Dialog -->
+  <q-dialog v-model="showImpressum" persistent full-width transition-show="fade" transition-hide="fade">
+    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
+      <q-card-section class="row items-center justify-between">
+        <div class="text-h6">Information according to section 5 DDG (Digitale Dienste Gesetz)
+        </div>
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-section class="scroll" style="max-height: 70vh;">
+        <div>
+          <p><i>This legal notice applies to the online service Bibbly (www.bibbly.io), a product of Skysail
+              Consulting GmbH.</i></p>
+          <p>
+            Skysail Consulting GmbH <br>
+            Spielwang 7<br />
+            83377 Vachendorf<br />
+            Germany</p>
+
+          <p><strong>Contact:</strong></p>
+          <p>Email: info@skysail.io<br />
+            Phone: + 49 (0) 861 166 267 81</p>
+
+          <p><strong>Managing Director:</strong></p>
+          <p>Carsten Gräf</p>
+
+          <p><strong>Register Entry:</strong></p>
+          <p>Registration in the commercial register.<br />
+            Register court: Commercial Register B Traunstein<br />
+            Register number: HRB 27170</p>
+
+          <p><strong>VAT Number:</strong></p>
+          <p>DE319194915</p>
+        </div>
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-actions align="right">
+        <q-btn flat label="Close" color="teal" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script setup lang="ts">
@@ -114,6 +210,7 @@ const router = useRouter();
 const showBackButton = computed(() =>
   ['recipe-detail'].includes(route.name as string)
 );
+const showImpressum = ref(false);
 
 const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
 
@@ -151,8 +248,8 @@ function onAgb() {
   console.log('AGB geklickt')
 }
 
-function onImpressum() {
-  console.log('Impressum geklickt')
+function openImpressum() {
+  showImpressum.value = true;
 }
 
 
@@ -172,5 +269,23 @@ function onLogout() {
 .logo-image {
   height: 30px;
   object-fit: contain;
+}
+
+.q-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.q-page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.q-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>
