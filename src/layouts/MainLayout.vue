@@ -117,8 +117,13 @@
         <!-- Trennlinie -->
         <q-separator spaced class="q-mt-md" />
 
-        <!-- Copyright -->
-        <div class="row justify-end q-px-md q-mt-sm full-width">
+        <!-- Atribution -->
+
+        <!-- Attribution + Copyright in einer Zeile -->
+        <div class="row justify-between items-start q-px-md q-mt-sm full-width">
+          <div class="text-caption text-grey-5">
+            Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
+          </div>
           <div class="text-caption text-grey-5 text-right">
             © 2025 Skysail Consulting GmbH. All rights reserved.
           </div>
@@ -142,9 +147,14 @@
         <!-- Trennlinie -->
         <q-separator spaced class="q-mt-md" />
 
-        <!-- Copyright -->
-        <div class="text-caption text-grey-5 text-center q-mt-xs">
-          © 2025 Skysail Consulting GmbH. All rights reserved.
+        <!-- Attribution + Copyright in einer Zeile -->
+        <div class="row justify-between items-start q-px-md q-mt-sm full-width">
+          <div class="text-caption text-grey-5">
+            Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
+          </div>
+          <div class="text-caption text-grey-5 text-right">
+            © 2025 Skysail Consulting GmbH. All rights reserved.
+          </div>
         </div>
       </div>
 

@@ -39,8 +39,8 @@
         arrows>
         <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="index" class="q-pa-sm">
           <q-card flat bordered class="q-pa-md">
+            <q-img :src="item.img" />
             <div class="column items-center">
-              <q-icon :name="item.icon" size="48px" color="primary" />
               <div class="app-card-title-welcome q-mt-md">{{ item.title }}</div>
               <div class="text-subtitle2 text-grey-7 text-center q-mt-sm">
                 {{ item.subtitle }}
