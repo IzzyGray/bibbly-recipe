@@ -15,9 +15,9 @@
 
         <!-- Zentrale Navigation -->
         <div class="row q-gutter-md justify-center items-center q-mx-auto" v-if="$q.screen.gt.sm">
-          <q-btn flat label="Product" class="text-grey" @click="$router.push('/product')" />
-          <q-btn flat label="Collections" class="text-grey" @click="$router.push('/collections')" />
-          <q-btn flat label="About Us" class="text-grey" @click="$router.push('/about')" />
+          <q-btn flat size="lg" label="Product" class="text-grey text-capitalize" @click="$router.push('/product')" />
+          <q-btn flat label="Collections" class="text-grey text-capitalize" @click="$router.push('/collections')" />
+          <q-btn flat label="About Us" class="text-grey text-capitalize" @click="$router.push('/about')" />
         </div>
 
         <!-- Rechte Buttons (Login / Sign Up) -->
