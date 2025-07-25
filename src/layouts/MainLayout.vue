@@ -111,7 +111,7 @@
           <q-btn flat dense label="Legal Notice" class="text-capitalize text-caption" @click="openImpressum" />
           <q-btn flat dense label="Privacy" class="text-capitalize text-caption" />
           <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" @click="openDisclaimer" />
-          <q-btn flat dense label=" About" class="text-capitalize text-caption" />
+          <q-btn flat dense label=" About Us" class="text-capitalize text-caption" @click="$router.push('/about')" />
           <q-btn flat dense label="Contact" class="text-capitalize text-caption" @click="contactDialog = true" />
         </div>
         <!-- Trennlinie -->
@@ -139,9 +139,11 @@
 
         <!-- Vertikale Linkliste -->
         <div class="column items-center text-caption q-gutter-xs">
-          <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
+
           <div class="cursor-pointer" @click="openImpressum">Legal Notice</div>
           <div class="cursor-pointer" @click="openDisclaimer">Disclaimer</div>
+          <div class="cursor-pointer" @click="$router.push('/about')">About Us</div>
+          <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
           <div class="cursor-pointer">Privacy</div>
         </div>
         <!-- Trennlinie -->
@@ -325,7 +327,7 @@ const captchaAnswer = ref('')
 const captchaQuestion = ref('')
 const correctAnswer = ref(0)
 
-const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
+const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview', 'about']
 
 const isSimpleHeader = computed(() =>
   typeof route.name === 'string' && simpleHeaderRoutes.includes(route.name)

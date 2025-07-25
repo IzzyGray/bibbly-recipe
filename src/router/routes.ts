@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
         name: 'preview',
         component: () => import('pages/RecipePreviewPage.vue'),
       },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import('pages/AboutPage.vue'),
+      },
     ],
   },
   {
