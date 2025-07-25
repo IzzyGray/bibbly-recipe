@@ -3,31 +3,37 @@
 
     <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
     <q-header v-if="isSimpleHeader" class="bg-transparent-header">
-      <q-toolbar class="justify-between q-py-md">
-        <div class="row items-center cursor-pointer q-ml-xl" @click="goToWelcome">
+      <q-toolbar class="q-py-md q-px-lg q-gutter-md items-center">
 
+        <!-- Logo links -->
+        <div class="row items-center cursor-pointer q-gutter-sm" @click="goToWelcome">
           <img src="../assets/images/logo.png" alt="Bibbly Logo" class="logo-image" />
-          <q-toolbar-title class="app-logo-text">
+          <q-toolbar-title class="app-logo-text q-ml-sm">
             bibbly.
           </q-toolbar-title>
         </div>
-        <div class="row items-center q-gutter-sm q-pr-sm q-mr-xl">
-          <!-- Desktop: Zwei Buttons -->
+
+        <!-- Zentrale Navigation -->
+        <div class="row q-gutter-md justify-center items-center q-mx-auto" v-if="$q.screen.gt.sm">
+          <q-btn flat label="Product" class="text-grey" @click="$router.push('/product')" />
+          <q-btn flat label="Collections" class="text-grey" @click="$router.push('/collections')" />
+          <q-btn flat label="About Us" class="text-grey" @click="$router.push('/about')" />
+        </div>
+
+        <!-- Rechte Buttons (Login / Sign Up) -->
+        <div class="row items-center q-gutter-sm">
+          <!-- Desktop -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
-            <q-btn flat size="lg" style="color:#191919" class="text-capitalize" @click="goToLogin">
-              <span style="font-size: 1rem;">
-                Login
-              </span>
+            <q-btn flat size="lg" class="text-capitalize" style="color:#191919" @click="goToLogin">
+              <span style="font-size: 1rem;">Login</span>
             </q-btn>
             <q-btn size="md" color="secondary" class="text-capitalize" @click="goToRegister">
-              <span style="font-size: 1rem;">
-                Sign Up
-              </span>
+              <span style="font-size: 1rem;">Sign Up</span>
               <q-icon name="arrow_forward" size="16px" class="q-ml-sm" />
             </q-btn>
           </div>
 
-          <!-- Mobile: Kombinierter Button mit Menü -->
+          <!-- Mobile -->
           <q-btn dense round flat icon="login" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
@@ -41,6 +47,7 @@
             </q-menu>
           </q-btn>
         </div>
+
       </q-toolbar>
     </q-header>
 
