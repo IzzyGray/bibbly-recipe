@@ -112,7 +112,7 @@
           <q-btn flat dense label="Privacy" class="text-capitalize text-caption" />
           <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" />
           <q-btn flat dense label=" About" class="text-capitalize text-caption" />
-          <q-btn flat dense label="Contact" class="text-capitalize text-caption" />
+          <q-btn flat dense label="Contact" class="text-capitalize text-caption" @click="contactDialog = true" />
         </div>
         <!-- Trennlinie -->
         <q-separator spaced class="q-mt-md" />
@@ -134,7 +134,7 @@
 
         <!-- Vertikale Linkliste -->
         <div class="column items-center text-caption q-gutter-xs">
-          <div class="cursor-pointer">Contact</div>
+          <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
           <div class="cursor-pointer" @click="openImpressum()">Legal Notice</div>
           <div class="cursor-pointer">Disclaimer</div>
           <div class="cursor-pointer">Privacy</div>
@@ -196,21 +196,66 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
+
+  <!-- Kontakt Dialog -->
+  <q-dialog v-model="contactDialog" persistent>
+    <q-card style="min-width: 300px; max-width: 600px; width: 90vw;">
+      <q-card-section class="text-h6">
+        Get in Touch
+      </q-card-section>
+
+      <q-card-section>
+        <q-form @submit.prevent="submitContactForm">
+          <div class="q-mx-auto column q-gutter-md" style="max-width: 500px;">
+            <q-input v-model="name" label="Name" filled required />
+            <q-input v-model="email" label="Email" filled type="email" :rules="[validateEmail]" required />
+            <q-input v-model="message" label="Message" filled type="textarea" autogrow :rules="[validateMessage]"
+              required bottom-slots>
+              <template #hint>
+                Hint: Please enter between 80 - 300 characters.
+              </template>
+            </q-input>
+
+            <q-input v-model="captchaAnswer" :label="captchaQuestion" filled type="number" :rules="[validateCaptcha]"
+              required class="q-mt-md" />
+
+            <div class="q-mt-md row justify-end q-gutter-sm">
+              <q-btn flat label="Cancel" @click="contactDialog = false" />
+              <q-btn label="Send" type="submit" color="primary" />
+            </div>
+          </div>
+        </q-form>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
+
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router'
 
 const rightDrawerOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
+
 // Hier gibst du die Routen-Namen an, bei denen der Zurück-Button angezeigt werden soll
 const showBackButton = computed(() =>
   ['recipe-detail'].includes(route.name as string)
 );
 const showImpressum = ref(false);
+
+//Kontaktformular
+const contactDialog = ref(false);
+const name = ref('')
+const email = ref('')
+const message = ref('')
+
+//Captcha
+const captchaAnswer = ref('')
+const captchaQuestion = ref('')
+const correctAnswer = ref(0)
 
 const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
 
@@ -252,10 +297,54 @@ function openImpressum() {
   showImpressum.value = true;
 }
 
+function submitContactForm() {
+
+  console.log({ name: name.value, email: email.value, message: message.value })
+  contactDialog.value = false;
+}
+
+function validateEmail(val: string) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(val) || 'Bitte gültige E-Mail-Adresse eingeben'
+}
+
+function validateMessage(val: string) {
+  if (!val) return 'Message is required'
+  if (val.length < 80) return 'Message must be at least 80 characters'
+  if (val.length > 300) return 'Message must not exceed 300 characters'
+
+  const blacklist = ["select", "insert", "update", "delete", "drop", "--", ";", "' OR", "\" OR", "1=1"]
+  const lowerVal = val.toLowerCase()
+
+  if (blacklist.some(keyword => lowerVal.includes(keyword))) {
+    return 'Please rephrase your message.'
+  }
+
+  return true
+}
+
+onMounted(() => {
+  generateCaptcha()
+})
+
+function generateCaptcha() {
+  const a = Math.floor(Math.random() * 10) + 1
+  const b = Math.floor(Math.random() * 10) + 1
+  captchaQuestion.value = `What is ${a} + ${b}?`
+  correctAnswer.value = a + b
+  captchaAnswer.value = ''
+}
+
+function validateCaptcha(val: string) {
+  return parseInt(val) === correctAnswer.value || 'Incorrect captcha answer'
+}
+
+
 
 function onLogout() {
   console.log('Logout geklickt')
 }
+
 </script>
 
 <style scoped>
