@@ -15,19 +15,26 @@
 
         <!-- Zentrale Navigation -->
         <div class="row q-gutter-md justify-center items-center q-mx-auto" v-if="$q.screen.gt.sm">
-          <q-btn flat size="lg" label="Product" class="text-grey text-capitalize" @click="$router.push('/product')" />
-          <q-btn flat label="Collections" class="text-grey text-capitalize" @click="$router.push('/collections')" />
-          <q-btn flat label="About Us" class="text-grey text-capitalize" @click="$router.push('/about')" />
+
+          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/product')">
+            <span style="font-size: 1rem;">Product</span>
+          </q-btn>
+          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/collections')">
+            <span style="font-size: 1rem;">Collections</span>
+          </q-btn>
+          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/about')">
+            <span style="font-size: 1rem;">About Us</span>
+          </q-btn>
         </div>
 
         <!-- Rechte Buttons (Login / Sign Up) -->
         <div class="row items-center q-gutter-sm">
           <!-- Desktop -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
-            <q-btn flat size="lg" class="text-capitalize" style="color:#191919" @click="goToLogin">
+            <q-btn flat class="text-capitalize" style="color:#191919" @click="goToLogin">
               <span style="font-size: 1rem;">Login</span>
             </q-btn>
-            <q-btn size="md" color="secondary" class="text-capitalize" @click="goToRegister">
+            <q-btn color="secondary" class="text-capitalize" @click="goToRegister">
               <span style="font-size: 1rem;">Sign Up</span>
               <q-icon name="arrow_forward" size="16px" class="q-ml-sm" />
             </q-btn>
@@ -37,6 +44,16 @@
           <q-btn dense round flat icon="login" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
+                <q-item clickable v-close-popup @click="$router.push('/product')">
+                  <q-item-section>Product</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="$router.push('/collections')">
+                  <q-item-section>Collections</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="$router.push('/about')">
+                  <q-item-section>About Us</q-item-section>
+                </q-item>
+                <q-separator spaced />
                 <q-item clickable v-close-popup @click="goToLogin">
                   <q-item-section>Login</q-item-section>
                 </q-item>
