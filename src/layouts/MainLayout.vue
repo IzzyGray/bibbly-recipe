@@ -235,6 +235,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
+
 
 const rightDrawerOpen = ref(false);
 const route = useRoute();
@@ -251,6 +253,7 @@ const contactDialog = ref(false);
 const name = ref('')
 const email = ref('')
 const message = ref('')
+const $q = useQuasar()
 
 //Captcha
 const captchaAnswer = ref('')
@@ -299,8 +302,29 @@ function openImpressum() {
 
 function submitContactForm() {
 
+  // Hier könntest du eine API ansprechen
+
   console.log({ name: name.value, email: email.value, message: message.value })
+  // Felder zurücksetzen
+  name.value = ''
+  email.value = ''
+  message.value = ''
+  captchaAnswer.value = ''
+  generateCaptcha()
+
+  // Dialog schließen
+
   contactDialog.value = false;
+
+  // Bestätigung anzeigen
+
+  $q.notify({
+    type: 'positive',
+    message: 'Message sent! 🐦 Even the pigeons are impressed.',
+    color: 'secondary',
+    position: 'top',
+    timeout: 4000
+  })
 }
 
 function validateEmail(val: string) {
