@@ -2,7 +2,7 @@
   <q-page class="welcome-bg column">
 
     <!-- Intro Section -->
-    <div class="q-pa-xl bg-white">
+    <section id="intro" class="q-pa-xl bg-white">
       <div class="text-center q-mb-md q-mt-xl">
         <div class="app-desc-welcome">Bookmarks, But <span class="gradient-text">Better</span></div>
         <div class="app-desc-text-welcome q-mt-lg">
@@ -24,7 +24,19 @@
           </q-btn>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="product" class="q-pa-xl text-center">
+      <div class="app-ext-welcome q-mb-sm">
+        How Bibbly works
+      </div>
+
+      <div class="app-ext-text-welcome q-mb-md">
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa.
+      </div>
+    </section>
 
     <!-- Carousel Section with Collections -->
     <section id="collections" class="q-pa-md flex flex-center">
@@ -73,7 +85,7 @@
 
 
     <!-- Download Extension Section -->
-    <div class="q-pa-xl bg-grey-1 text-center">
+    <section id="extension" class="q-pa-xl bg-grey-1 text-center">
       <div class="app-ext-welcome q-mb-sm">
         Save Links with the bibbly Extension
       </div>
@@ -85,7 +97,26 @@
 
       <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
         class="q-mt-sm text-capitalize" @click="goToExtension" />
-    </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="q-pa-xl text-center">
+      <div class="app-ext-welcome q-mb-sm">
+        About
+      </div>
+
+      <div class="app-ext-text-welcome q-mb-md">
+        We believe that small, clever tools can simplify your life and give you the time to focus on what truly
+        matters.<br>
+        As IT professionals, we spend a lot of time at our computers, often with
+        numerous tabs open,
+        gathering all kinds of information. <br>
+        Our mission is to keep this information organized and easily
+        retrievable.<br>
+        That's where Bibbly comes in –
+        designed to help us, and hopefully, to help you too.
+      </div>
+    </section>
   </q-page>
 
 </template>

@@ -16,14 +16,17 @@
         <!-- Zentrale Navigation -->
         <div class="row q-gutter-md justify-center items-center q-mx-auto" v-if="$q.screen.gt.sm">
 
-          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/product')">
+          <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('product')">
             <span style="font-size: 1rem;">Product</span>
           </q-btn>
-          <q-btn flat class="text-grey text-capitalize" @click="scrollToCollections">
+          <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('collections')">
             <span style="font-size: 1rem;">Collections</span>
           </q-btn>
-          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/about')">
-            <span style="font-size: 1rem;">About Us</span>
+          <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('about')">
+            <span style=" font-size: 1rem;">About</span>
+          </q-btn>
+          <q-btn outline rounded color="warning" class="text-capitalize" @click="() => scrollToSection('extension')">
+            <span style=" font-size: 1rem;">Add to Chrome </span>
           </q-btn>
         </div>
 
@@ -44,14 +47,18 @@
           <q-btn dense round flat icon="login" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
-                <q-item clickable v-close-popup @click="$router.push('/product')">
+                <q-item clickable v-close-popup @click="() => scrollToSection('product')">
                   <q-item-section>Product</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup @click="scrollToCollections">
+                <q-item clickable v-close-popup @click="() => scrollToSection('collections')">
                   <q-item-section>Collections</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup @click="$router.push('/about')">
-                  <q-item-section>About Us</q-item-section>
+                <q-item clickable v-close-popup @click="() => scrollToSection('about')">
+                  <q-item-section>About</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="() => scrollToSection('extension')"
+                  class="text-warning text-italic">
+                  <q-item-section>Add to Chrome</q-item-section>
                 </q-item>
                 <q-separator spaced />
                 <q-item clickable v-close-popup @click="goToLogin">
@@ -90,29 +97,29 @@
 
         <q-item clickable v-ripple @click="onImport">
           <q-item-section avatar><q-icon name="file_upload" /></q-item-section>
-          <q-item-section>Importieren</q-item-section>
+          <q-item-section>Import</q-item-section>
         </q-item>
 
         <q-item clickable v-ripple @click="onShare">
           <q-item-section avatar><q-icon name="share" /></q-item-section>
-          <q-item-section>Teilen</q-item-section>
+          <q-item-section>Share</q-item-section>
         </q-item>
 
         <q-item clickable v-ripple @click="onAgb">
           <q-item-section avatar><q-icon name="gavel" /></q-item-section>
-          <q-item-section>AGB</q-item-section>
+          <q-item-section>Terms</q-item-section>
         </q-item>
 
         <q-item clickable v-ripple @click="openImpressum">
           <q-item-section avatar><q-icon name="info" /></q-item-section>
-          <q-item-section>Impressum</q-item-section>
+          <q-item-section>Legal Notice</q-item-section>
         </q-item>
 
         <q-separator spaced />
 
         <q-item clickable v-ripple @click="onLogout">
           <q-item-section avatar><q-icon name="logout" /></q-item-section>
-          <q-item-section>Abmelden</q-item-section>
+          <q-item-section>Logout</q-item-section>
         </q-item>
 
       </q-list>
@@ -135,7 +142,6 @@
           <q-btn flat dense label="Legal Notice" class="text-capitalize text-caption" @click="openImpressum" />
           <q-btn flat dense label="Privacy" class="text-capitalize text-caption" />
           <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" @click="openDisclaimer" />
-          <q-btn flat dense label=" About Us" class="text-capitalize text-caption" @click="$router.push('/about')" />
           <q-btn flat dense label="Contact" class="text-capitalize text-caption" @click="contactDialog = true" />
         </div>
         <!-- Trennlinie -->
@@ -166,7 +172,6 @@
 
           <div class="cursor-pointer" @click="openImpressum">Legal Notice</div>
           <div class="cursor-pointer" @click="openDisclaimer">Disclaimer</div>
-          <div class="cursor-pointer" @click="$router.push('/about')">About Us</div>
           <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
           <div class="cursor-pointer">Privacy</div>
         </div>
@@ -351,7 +356,7 @@ const captchaAnswer = ref('')
 const captchaQuestion = ref('')
 const correctAnswer = ref(0)
 
-const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview', 'about']
+const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
 
 const isSimpleHeader = computed(() =>
   typeof route.name === 'string' && simpleHeaderRoutes.includes(route.name)
@@ -464,22 +469,19 @@ function onLogout() {
   console.log('Logout geklickt')
 }
 
-async function scrollToCollections() {
-  // Wenn du bereits auf der WelcomePage bist
+async function scrollToSection(sectionId: string) {
   if (route.name === 'welcome') {
-    scrollToAnchor()
+    scrollToAnchor(sectionId)
   } else {
-    // Navigiere zur WelcomePage mit Hash
-    await router.push({ name: 'welcome', hash: '#collections' })
+    await router.push({ name: 'welcome', hash: `#${sectionId}` })
   }
 }
 
-function scrollToAnchor() {
-  // Warte etwas, bis DOM bereit ist
+function scrollToAnchor(sectionId: string) {
   setTimeout(() => {
-    const el = document.getElementById('collections')
+    const el = document.getElementById(sectionId)
     if (el) {
-      const offset = 80 // Höhe deines Headers in px (anpassen!)
+      const offset = 80 // Header-Höhe ggf. dynamisch machen
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset
       window.scrollTo({ top, behavior: 'smooth' })
     }
