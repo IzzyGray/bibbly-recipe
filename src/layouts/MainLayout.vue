@@ -15,12 +15,11 @@
 
         <!-- Zentrale Navigation -->
         <div class="row q-gutter-md justify-center items-center q-mx-auto" v-if="$q.screen.gt.sm">
-
-          <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('product')">
-            <span style="font-size: 1rem;">Product</span>
-          </q-btn>
           <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('collections')">
             <span style="font-size: 1rem;">Collections</span>
+          </q-btn>
+          <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('product')">
+            <span style="font-size: 1rem;">Product</span>
           </q-btn>
           <q-btn flat class="text-grey text-capitalize" @click="() => scrollToSection('about')">
             <span style=" font-size: 1rem;">About</span>
@@ -47,11 +46,11 @@
           <q-btn dense round flat icon="login" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
-                <q-item clickable v-close-popup @click="() => scrollToSection('product')">
-                  <q-item-section>Product</q-item-section>
-                </q-item>
                 <q-item clickable v-close-popup @click="() => scrollToSection('collections')">
                   <q-item-section>Collections</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="() => scrollToSection('product')">
+                  <q-item-section>Product</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup @click="() => scrollToSection('about')">
                   <q-item-section>About</q-item-section>

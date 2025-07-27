@@ -25,25 +25,12 @@
         </div>
       </div>
     </section>
-
-    <!-- Product Section -->
-    <section id="product" class="q-pa-xl text-center">
-      <div class="app-ext-welcome q-mb-sm">
-        How Bibbly works
-      </div>
-
-      <div class="app-ext-text-welcome q-mb-md">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa.
-      </div>
-    </section>
-
     <!-- Carousel Section with Collections -->
-    <section id="collections" class="q-pa-md flex flex-center">
+    <section id="collections" class="q-pa-md flex flex-center bg-grey-1">
       <div style="max-width: 900px; width: 100%;">
 
         <!-- Neue Überschrift + Beschreibung -->
-        <div class="text-center q-mb-lg">
+        <div class="text-center q-mb-lg q-mt-xl">
           <div class="app-ext-welcome">
             Explore Your Collections
           </div>
@@ -84,38 +71,126 @@
     </section>
 
 
+    <!-- Product Section -->
+    <section id="product" class="q-pa-xl bg-white">
+      <AppPageWrapper maxWidth="960px">
+        <div class="row items-start q-col-gutter-xl">
+
+          <!-- 🟨 LEFT COLUMN -->
+          <div class="col-12 col-md-6">
+            <div class="text-h5 text-weight-bold q-mb-md">Powerful suite of tools</div>
+
+            <div class="text-body1 text-grey-7 q-mb-xl">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+            </div>
+
+            <div class="column q-gutter-sm">
+              <q-card flat bordered class="bg-grey-2 q-pa-md">
+                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
+                <div class="text-body2 text-grey-7">
+                  Take collaboration to the next level with security and administrative features built for teams.
+                </div>
+              </q-card>
+
+              <q-card flat bordered class="bg-grey-1 q-pa-md">
+                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
+                <div class="text-body2 text-grey-7">
+                  Take collaboration to the next level with security and administrative features built for teams.
+                </div>
+              </q-card>
+
+              <q-card flat bordered class="bg-grey-1 q-pa-md">
+                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
+                <div class="text-body2 text-grey-7">
+                  Take collaboration to the next level with security and administrative features built for teams.
+                </div>
+              </q-card>
+            </div>
+          </div>
+
+          <!-- 🟧 RIGHT COLUMN -->
+          <div class="col-12 col-md-6">
+            <q-card class="bg-dark text-white q-pa-lg" style="border-radius: 12px;">
+              <div class="text-caption text-grey-4 q-mb-sm">Simple_Package</div>
+
+              <pre class="text-white q-mb-md">npm login --registry=https://npm.pkg.github.com --scope=@phanatic
+            Successfully logged-in
+
+            npm publish
+            Package published.</pre>
+
+              <!-- Example Chat Bubbles -->
+              <div class="q-mb-sm">
+                <q-avatar size="32px" class="q-mr-sm">
+                  <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+                </q-avatar>
+                <q-badge color="dark" class="q-mb-xs">
+                  🇺🇸 Mark Miller requested access.
+                </q-badge>
+              </div>
+
+              <div class="q-mb-sm">
+                <q-avatar size="32px" class="q-mr-sm">
+                  <img src="https://randomuser.me/api/portraits/women/2.jpg" />
+                </q-avatar>
+                <q-badge color="white" text-color="black">
+                  🇮🇹 Sara Smith joined <strong>Simple_Package</strong> project.
+                </q-badge>
+              </div>
+
+              <div>
+                <q-avatar size="32px" class="q-mr-sm">
+                  <img src="https://randomuser.me/api/portraits/women/3.jpg" />
+                </q-avatar>
+                <q-badge color="white" text-color="black">
+                  🇬🇧 Lisa Zinych shipped package <strong>2.04</strong> with a verified signature.
+                </q-badge>
+              </div>
+            </q-card>
+          </div>
+        </div>
+      </AppPageWrapper>
+    </section>
+
+
+
     <!-- Download Extension Section -->
     <section id="extension" class="q-pa-xl bg-grey-1 text-center">
-      <div class="app-ext-welcome q-mb-sm">
-        Save Links with the bibbly Extension
-      </div>
+      <AppPageWrapper maxWidth="960px">
+        <div class="app-ext-welcome q-mb-sm">
+          Save Links with the bibbly Extension
+        </div>
 
-      <div class="app-ext-text-welcome q-mb-md">
-        Install the bibbly browser extension to add links in just one click - from any website, at any time.<br />
-        Everything you save is instantly added to your collection - no copy-paste, no hassle.
-      </div>
+        <div class="app-ext-text-welcome q-mb-md">
+          Install the bibbly browser extension to add links in just one click - from any website, at any time.<br />
+          Everything you save is instantly added to your collection - no copy-paste, no hassle.
+        </div>
 
-      <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
-        class="q-mt-sm text-capitalize" @click="goToExtension" />
+        <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
+          class="q-mt-sm text-capitalize" @click="goToExtension" />
+      </AppPageWrapper>
     </section>
 
     <!-- About Section -->
     <section id="about" class="q-pa-xl text-center">
-      <div class="app-ext-welcome q-mb-sm">
-        About
-      </div>
+      <AppPageWrapper maxWidth="960px">
+        <div class="app-ext-welcome q-mb-sm">
+          About
+        </div>
 
-      <div class="app-ext-text-welcome q-mb-md">
-        We believe that small, clever tools can simplify your life and give you the time to focus on what truly
-        matters.<br>
-        As IT professionals, we spend a lot of time at our computers, often with
-        numerous tabs open,
-        gathering all kinds of information. <br>
-        Our mission is to keep this information organized and easily
-        retrievable.<br>
-        That's where Bibbly comes in –
-        designed to help us, and hopefully, to help you too.
-      </div>
+        <div class="app-ext-text-welcome q-mb-md">
+          We believe that small, clever tools can simplify your life and give you the time to focus on what truly
+          matters.
+          As IT professionals, we spend a lot of time at our computers, often with
+          numerous tabs open,
+          gathering all kinds of information.
+          Our mission is to keep this information organized and easily
+          retrievable.
+          That's where Bibbly comes in –
+          designed to help us, and hopefully, to help you too.
+        </div>
+      </AppPageWrapper>
     </section>
   </q-page>
 
@@ -129,6 +204,7 @@ import Pic30 from 'src/assets/images/pic30.jpg'
 import Pic20 from 'src/assets/images/pic20.jpg'
 import Pic10 from 'src/assets/images/pic10.jpg'
 import Pic7 from 'src/assets/images/pic7.png'
+import AppPageWrapper from 'components/AppPageWrapper.vue'
 
 const router = useRouter();
 const demoUrl = ref('');
