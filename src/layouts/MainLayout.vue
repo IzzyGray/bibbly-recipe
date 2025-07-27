@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <!-- Variante 1: Kleiner Header für bestimmte Seiten -->
+    <!-- Variante 1: Header für Welcome Seiten ohne Anmeldung -->
     <q-header v-if="isSimpleHeader" class="bg-transparent-header">
       <q-toolbar class="q-py-md q-px-lg q-gutter-md items-center">
 
@@ -19,7 +19,7 @@
           <q-btn flat class="text-grey text-capitalize" @click="$router.push('/product')">
             <span style="font-size: 1rem;">Product</span>
           </q-btn>
-          <q-btn flat class="text-grey text-capitalize" @click="$router.push('/collections')">
+          <q-btn flat class="text-grey text-capitalize" @click="scrollToCollections">
             <span style="font-size: 1rem;">Collections</span>
           </q-btn>
           <q-btn flat class="text-grey text-capitalize" @click="$router.push('/about')">
@@ -47,7 +47,7 @@
                 <q-item clickable v-close-popup @click="$router.push('/product')">
                   <q-item-section>Product</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup @click="$router.push('/collections')">
+                <q-item clickable v-close-popup @click="scrollToCollections">
                   <q-item-section>Collections</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup @click="$router.push('/about')">
@@ -462,6 +462,28 @@ function validateCaptcha(val: string) {
 
 function onLogout() {
   console.log('Logout geklickt')
+}
+
+async function scrollToCollections() {
+  // Wenn du bereits auf der WelcomePage bist
+  if (route.name === 'welcome') {
+    scrollToAnchor()
+  } else {
+    // Navigiere zur WelcomePage mit Hash
+    await router.push({ name: 'welcome', hash: '#collections' })
+  }
+}
+
+function scrollToAnchor() {
+  // Warte etwas, bis DOM bereit ist
+  setTimeout(() => {
+    const el = document.getElementById('collections')
+    if (el) {
+      const offset = 80 // Höhe deines Headers in px (anpassen!)
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  }, 100)
 }
 
 </script>

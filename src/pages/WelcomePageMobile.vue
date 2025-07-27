@@ -24,8 +24,8 @@
       </div>
     </div>
 
-    <!-- Cards Section (statt Carousel) -->
-    <div class="q-pa-md">
+    <!-- Cards Section (instead Carousel) with Collections -->
+    <section id="collections" class="q-pa-sm q-pa-md-md flex flex-center">
       <div class="text-center q-mb-lg">
         <div class="app-ext-welcome">
           Explore Your Collections
@@ -57,7 +57,7 @@
           </q-card>
         </q-carousel-slide>
       </q-carousel>
-    </div>
+    </section>
 
 
     <!-- Download Extension Section -->
@@ -66,12 +66,12 @@
         Save Links with the bibbly Extension
       </div>
 
-      <div class="app-ext-text-welcome q-mb-md">
+      <div class="text-subtitle2 text-grey-7 q-mb-md">
         Install the bibbly browser extension to add links in just one click – from any website, at any time.<br />
         Everything you save is instantly added to your collection – no copy-paste, no hassle.
       </div>
 
-      <q-btn label="Get the Extension" icon="extension" style="background: primary; color: white" unelevated size="md"
+      <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
         class="q-mt-sm text-capitalize" @click="goToExtension" />
     </div>
   </q-page>

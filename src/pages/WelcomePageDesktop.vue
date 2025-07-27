@@ -26,8 +26,8 @@
       </div>
     </div>
 
-    <!-- Carousel Section -->
-    <div class="q-pa-md flex flex-center">
+    <!-- Carousel Section with Collections -->
+    <section id="collections" class="q-pa-md flex flex-center">
       <div style="max-width: 900px; width: 100%;">
 
         <!-- Neue Überschrift + Beschreibung -->
@@ -69,7 +69,7 @@
         </q-carousel>
 
       </div>
-    </div>
+    </section>
 
 
     <!-- Download Extension Section -->
