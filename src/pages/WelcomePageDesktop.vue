@@ -49,7 +49,7 @@
                 <q-icon :name="item.icon" size="50px" color="primary" />
               </div>
               <div class="q-mt-md text-center">
-                <div class="q-mt-md app-card-title-welcome">{{ item.title }}</div>
+                <div class="q-mt-md app-card-title-welcome text-accent">{{ item.title }}</div>
               </div>
               <div class="text-subtitle1 text-grey-7 q-mt-sm text-center">
                 {{ item.subtitle }}
@@ -87,7 +87,7 @@
             style="width: 32%; min-height: 220px; display: flex; flex-direction: column; justify-content: center;">
             <q-card-section class="text-center">
               <q-icon :name="feature.icon" size="42px" color="secondary" class="q-mb-sm" />
-              <div class="text-h6">{{ feature.title }}</div>
+              <div class="text-h6 text-accent">{{ feature.title }}</div>
               <div class="text-body2 q-mt-sm">
                 {{ feature.description }}
               </div>
@@ -111,7 +111,7 @@
           Everything you save is instantly added to your collection - no copy-paste, no hassle.
         </div>
 
-        <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
+        <q-btn label="Get the Extension" icon="extension" color="primary" unelevated size="md"
           class="q-mt-sm text-capitalize" @click="goToExtension" />
       </AppPageWrapper>
     </section>
@@ -127,9 +127,8 @@
           <div class="col" style="flex: 1 1 50%;">
 
             <div class="app-ext-text-welcome q-mb-xl">
-              <p>We believe that small, clever tools can simplify your life and give you back the time
-                to
-                focus on what truly matters most.</p>
+              <p>We believe that small, clever tools can simplify your life and give you the time to focus on what truly
+                matters.</p>
               <p>As IT professionals, we spend a lot of time at our computers, often with numerous tabs open, gathering
                 all
                 kinds of information.</p>
