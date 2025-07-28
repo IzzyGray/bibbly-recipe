@@ -72,83 +72,27 @@
 
 
     <!-- Product Section -->
-    <section id="product" class="q-pa-xl bg-white">
+    <section id="product" class="q-py-xl bg-white text-center q-mt-xl">
       <AppPageWrapper maxWidth="960px">
-        <div class="row items-start q-col-gutter-xl">
+        <div class="app-ext-welcome q-mb-md">
+          Key Features at a Glance
+        </div>
 
-          <!-- 🟨 LEFT COLUMN -->
-          <div class="col-12 col-md-6">
-            <div class="text-h5 text-weight-bold q-mb-md">Powerful suite of tools</div>
+        <div class="app-ext-text-welcome q-mb-xl">
+          Discover how bibbly helps you collect, organize, and preserve online content effortlessly.
+        </div>
 
-            <div class="text-body1 text-grey-7 q-mb-xl">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa.
-            </div>
-
-            <div class="column q-gutter-sm">
-              <q-card flat bordered class="bg-grey-2 q-pa-md">
-                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
-                <div class="text-body2 text-grey-7">
-                  Take collaboration to the next level with security and administrative features built for teams.
-                </div>
-              </q-card>
-
-              <q-card flat bordered class="bg-grey-1 q-pa-md">
-                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
-                <div class="text-body2 text-grey-7">
-                  Take collaboration to the next level with security and administrative features built for teams.
-                </div>
-              </q-card>
-
-              <q-card flat bordered class="bg-grey-1 q-pa-md">
-                <div class="text-subtitle1 text-weight-bold q-mb-xs">Building the Simple ecosystem</div>
-                <div class="text-body2 text-grey-7">
-                  Take collaboration to the next level with security and administrative features built for teams.
-                </div>
-              </q-card>
-            </div>
-          </div>
-
-          <!-- 🟧 RIGHT COLUMN -->
-          <div class="col-12 col-md-6">
-            <q-card class="bg-dark text-white q-pa-lg" style="border-radius: 12px;">
-              <div class="text-caption text-grey-4 q-mb-sm">Simple_Package</div>
-
-              <pre class="text-white q-mb-md">npm login --registry=https://npm.pkg.github.com --scope=@phanatic
-            Successfully logged-in
-
-            npm publish
-            Package published.</pre>
-
-              <!-- Example Chat Bubbles -->
-              <div class="q-mb-sm">
-                <q-avatar size="32px" class="q-mr-sm">
-                  <img src="https://randomuser.me/api/portraits/men/1.jpg" />
-                </q-avatar>
-                <q-badge color="dark" class="q-mb-xs">
-                  🇺🇸 Mark Miller requested access.
-                </q-badge>
+        <div class="row q-gutter-y-xl justify-between">
+          <q-card v-for="(feature, index) in features" :key="index" class="q-pa-sm" flat bordered
+            style="width: 32%; min-height: 220px; display: flex; flex-direction: column; justify-content: center;">
+            <q-card-section class="text-center">
+              <q-icon :name="feature.icon" size="42px" color="secondary" class="q-mb-sm" />
+              <div class="text-h6">{{ feature.title }}</div>
+              <div class="text-body2 q-mt-sm">
+                {{ feature.description }}
               </div>
-
-              <div class="q-mb-sm">
-                <q-avatar size="32px" class="q-mr-sm">
-                  <img src="https://randomuser.me/api/portraits/women/2.jpg" />
-                </q-avatar>
-                <q-badge color="white" text-color="black">
-                  🇮🇹 Sara Smith joined <strong>Simple_Package</strong> project.
-                </q-badge>
-              </div>
-
-              <div>
-                <q-avatar size="32px" class="q-mr-sm">
-                  <img src="https://randomuser.me/api/portraits/women/3.jpg" />
-                </q-avatar>
-                <q-badge color="white" text-color="black">
-                  🇬🇧 Lisa Zinych shipped package <strong>2.04</strong> with a verified signature.
-                </q-badge>
-              </div>
-            </q-card>
-          </div>
+            </q-card-section>
+          </q-card>
         </div>
       </AppPageWrapper>
     </section>
@@ -249,6 +193,39 @@ const slides = [
   }
 ]
 
+const features = [
+  {
+    icon: 'search',
+    title: 'Search',
+    description: 'Quickly search across your collections and webpages to access what you need in seconds.'
+  },
+  {
+    icon: 'comment',
+    title: 'Comments',
+    description: 'Leave notes or reminders on links, snapshots, or collections - just for you or your team.'
+  },
+  {
+    icon: 'photo_camera',
+    title: 'Snapshots',
+    description: 'Save a visual copy of any webpage as it appears today - reliable, even if it changes tomorrow.'
+  },
+  {
+    icon: 'description',
+    title: 'Metadata',
+    description: 'Automatically store title, author, URL, and access date to ensure trustworthy references.'
+  },
+  {
+    icon: 'share',
+    title: 'Share',
+    description: 'Share your curated content with family, friends, or collaborators - instantly and easily.'
+  },
+  {
+    icon: 'notifications',
+    title: 'Monitoring',
+    description: 'Create alerts and get notified when a webpage changes - stay informed without effort.'
+  }
+]
+
 async function goToRegister() {
   await router.push('/register')
 }
@@ -334,5 +311,15 @@ function goToExtension() {
 .carousel-overlay {
   position: relative; // stellt sicher, dass es über dem Overlay liegt
   z-index: 2;
+}
+
+.q-card {
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
 }
 </style>
