@@ -117,23 +117,34 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="q-pa-xl text-center">
+    <section id="about" class="q-pa-xl">
       <AppPageWrapper maxWidth="960px">
-        <div class="app-ext-welcome q-mb-sm">
+        <div class="app-ext-welcome q-mb-xl text-center">
           About
         </div>
+        <div class="row no-wrap items-start q-gutter-xl">
+          <!-- Text Spalte -->
+          <div class="col" style="flex: 1 1 50%;">
 
-        <div class="app-ext-text-welcome q-mb-md">
-          We believe that small, clever tools can simplify your life and give you the time to focus on what truly
-          matters.
-          As IT professionals, we spend a lot of time at our computers, often with
-          numerous tabs open,
-          gathering all kinds of information.
-          Our mission is to keep this information organized and easily
-          retrievable.
-          That's where Bibbly comes in –
-          designed to help us, and hopefully, to help you too.
+            <div class="app-ext-text-welcome q-mb-xl">
+              <p>We believe that small, clever tools can simplify your life and give you back the time
+                to
+                focus on what truly matters most.</p>
+              <p>As IT professionals, we spend a lot of time at our computers, often with numerous tabs open, gathering
+                all
+                kinds of information.</p>
+              <p>Our mission is to keep this information organized and easily retrievable.</p>
+              <p>That's where Bibbly comes in – designed to help us, and hopefully, to help you too.</p>
+            </div>
+          </div>
+
+          <!-- Bild Spalte -->
+          <div class="col flex flex-center" style="flex: 1 1 50%;">
+            <q-img :src="Pic200" style="max-width: 100%; max-height: 320px;" spinner-color="primary"
+              alt="Organizing information illustration" />
+          </div>
         </div>
+
       </AppPageWrapper>
     </section>
   </q-page>
@@ -144,6 +155,7 @@
 import { ref } from 'vue'
 import { Notify } from 'quasar';
 import { useRouter } from 'vue-router';
+import Pic200 from 'src/assets/images/pic200.jpg'
 import Pic30 from 'src/assets/images/pic30.jpg'
 import Pic20 from 'src/assets/images/pic20.jpg'
 import Pic10 from 'src/assets/images/pic10.jpg'
@@ -307,6 +319,8 @@ function goToExtension() {
   z-index: 1;
   pointer-events: none;
 }
+
+
 
 .carousel-overlay {
   position: relative; // stellt sicher, dass es über dem Overlay liegt
