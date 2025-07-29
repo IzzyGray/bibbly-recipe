@@ -17,7 +17,8 @@
             </span>
           </q-btn>
 
-          <q-btn style="background: #191919; color: white" class="text-capitalize q-ml-sm">
+          <q-btn style="background: #191919; color: white" class="text-capitalize q-ml-sm"
+            @click="scrollToSection('product')">
             <span style="font-size: 1rem;">
               Learn more
             </span>
@@ -106,12 +107,21 @@
           Save Links with the bibbly Extension
         </div>
 
+
         <div class="app-ext-text-welcome q-mb-md">
-          Install the bibbly browser extension to add links in just one click - from any website, at any time.<br />
-          Everything you save is instantly added to your collection - no copy-paste, no hassle.
+          <p v-if="!isSupportedBrowser" class="text-warning" style="font-style: italic;">
+            Sorry, your browser is currently not supported.<br> You can get the extension for the following browsers:
+            {{ supportedBrowsers.join(', ') }}.
+          </p>
+          <p v-else>
+            Install the bibbly browser extension for {{ browserName }} to add links in just one click - from any
+            website, at any time.<br />
+            Everything you save is instantly added to your collection - no copy-paste, no hassle.
+          </p>
+
         </div>
 
-        <q-btn label="Get the Extension" icon="extension" color="primary" unelevated size="md"
+        <q-btn v-if="isSupportedBrowser" label="Get the Extension" icon="extension" color="primary" unelevated size="md"
           class="q-mt-sm text-capitalize" @click="goToExtension" />
       </AppPageWrapper>
     </section>
@@ -151,7 +161,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Notify } from 'quasar';
 import { useRouter } from 'vue-router';
 import Pic200 from 'src/assets/images/pic200.jpg'
@@ -164,6 +174,8 @@ import AppPageWrapper from 'components/AppPageWrapper.vue'
 const router = useRouter();
 const demoUrl = ref('');
 
+const browserName = ref('Browser');
+const supportedBrowsers = ['Chrome', 'Firefox', 'Edge', 'Opera'];
 
 
 const slide = ref('style')
@@ -237,6 +249,17 @@ const features = [
   }
 ]
 
+function scrollToSection(sectionId: string) {
+  setTimeout(() => {
+    const el = document.getElementById(sectionId)
+    if (el) {
+      const offset = 80 // Header-Höhe ggf. dynamisch machen
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  }, 100)
+}
+
 async function goToRegister() {
   await router.push('/register')
 }
@@ -266,9 +289,32 @@ function submitUrl() {
   void router.push({ name: 'preview', query: { url: demoUrl.value } });
 }
 
+
+
 function goToExtension() {
   window.open('https://example.com/extension', '_blank') // ← hier den echten Link einfügen
 }
+
+onMounted(() => {
+  browserName.value = detectBrowser();
+  console.log('Detected browser:', browserName.value);
+})
+
+function detectBrowser(): string {
+  const ua = navigator.userAgent;
+
+  if (/OPR\//.test(ua)) return 'Opera';
+  if (/Edg\//.test(ua)) return 'Edge';
+  if (/Chrome\//.test(ua) && !/Edg\//.test(ua) && !/OPR\//.test(ua)) return 'Chrome';
+  if (/Firefox\//.test(ua)) return 'Firefox';
+  if (/Safari/.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+
+  return 'Browser';
+}
+
+const isSupportedBrowser = computed(() =>
+  supportedBrowsers.includes(browserName.value)
+);
 
 </script>
 

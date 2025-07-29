@@ -12,9 +12,9 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: #1976d2;
-$secondary: #26a69a;
-$accent: #9c27b0;
+$primary: #087f8c;
+$secondary: #698f3f;
+$accent: #095256;
 
 $dark: #1d1d1d;
 $dark-page: #121212;
@@ -25,16 +25,7 @@ $info: #31ccec;
 $warning: #f2c037;
 
 $atomic-tangerine: #ff934f;
-$aspargus: #698f3f;
-$midnight-green: #095256;
 $teal: #087f8c;
-$indian-red: #eb5160;
-$xanthous: #ffba49;
-$mountbatten-pink: #9a7aa0;
-$columbia-blue: #c0d6df;
-$alice-blue: #dbe9ee;
-$celadon: #b8ebd0;
-$grey-white: #fefdff;
 
 .source-link {
   color: $teal;
@@ -46,26 +37,15 @@ $grey-white: #fefdff;
 }
 
 .card-show-button {
-  color: $atomic-tangerine;
+  color: green;
   background-color: rgba($atomic-tangerine, 0.1);
 
   &:hover {
     background-color: transparent !important;
-    color: $aspargus;
+    color: red;
     font-weight: bold;
     box-shadow: none !important;
   }
-}
-.atomic-tangerine {
-  color: $atomic-tangerine;
-}
-
-.midnight-green {
-  color: $midnight-green;
-}
-
-.indian-red {
-  color: $indian-red;
 }
 
 .app-logo-text {
@@ -111,7 +91,7 @@ $grey-white: #fefdff;
 }
 
 .gradient-text {
-  background: linear-gradient(to right, $teal, $aspargus);
+  background: linear-gradient(to right, $primary, $secondary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -149,14 +129,6 @@ $grey-white: #fefdff;
   font-weight: 400;
   font-size: 1.125rem;
   color: grey;
-}
-
-.subtitle {
-  font-family: 'Lobster', cursive;
-  font-size: 1.1rem;
-  font-style: italic;
-  opacity: 0.7;
-  margin-left: -5px;
 }
 
 .bg-image {

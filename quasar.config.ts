@@ -110,6 +110,8 @@ export default defineConfig((ctx) => {
         brand: {
           primary: '#087f8c',
           secondary: '#698f3f',
+          tertiary: '#eb5160',
+          quaternary: '#ffba49',
           accent: '#095256',
         },
       },

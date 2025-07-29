@@ -25,7 +25,7 @@
             <span style=" font-size: 1rem;">About</span>
           </q-btn>
           <q-btn outline rounded color="warning" class="text-capitalize" @click="() => scrollToSection('extension')">
-            <span style=" font-size: 1rem;">Add to Chrome </span>
+            <span style=" font-size: 1rem;">{{ extensionLabel }}</span>
           </q-btn>
         </div>
 
@@ -131,32 +131,37 @@
     <footer class="q-pa-sm q-px-lg q-mt-lg bg-grey-1 text-grey-9">
 
       <!-- Desktop/Footer links horizontal -->
-      <div v-if="$q.screen.gt.sm" class="column items-center q-mb-md">
-        <div class="text-subtitle1 text-uppercase text-grey-6 text-weight-bold q-mb-sm">
-          Where to?
-        </div>
+      <div v-if="$q.screen.gt.sm" class="column items-center q-mb-md q-mt-md">
 
         <div class="row q-gutter-md justify-center">
-          <q-btn flat dense label="FAQ" class="text-capitalize text-caption" />
           <q-btn flat dense label="Legal Notice" class="text-capitalize text-caption" @click="openImpressum" />
-          <q-btn flat dense label="Privacy" class="text-capitalize text-caption" />
+          <q-btn flat dense label="Privacy" class="text-capitalize text-caption" @click="openPrivacy" />
           <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" @click="openDisclaimer" />
           <q-btn flat dense label="Contact" class="text-capitalize text-caption" @click="contactDialog = true" />
         </div>
-        <!-- Trennlinie -->
-        <q-separator spaced class="q-mt-md" />
 
-        <!-- Atribution -->
-
-        <!-- Attribution + Copyright in einer Zeile -->
-        <div class="row justify-between items-start q-px-md q-mt-sm full-width">
-          <div class="text-caption text-grey-5">
-            Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
+        <!-- Attribution & Copyright in einer Zeile -->
+        <div class="row items-start q-px-sm q-mt-xl full-width">
+          <!-- Linke Spalte -->
+          <div class="col text-caption text-grey-5">
+            Images designed by
+            <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
           </div>
-          <div class="text-caption text-grey-5 text-right">
-            © 2025 Skysail Consulting GmbH. All rights reserved.
+
+          <!-- Mittlere Spalte: Back to top -->
+          <div class="col-auto">
+            <q-btn flat dense class="text-capitalize text-caption" @click="scrollToTop" label="Back to Top"
+              icon-right="arrow_upward" size="sm" color="grey" />
+          </div>
+
+          <!-- Rechte Spalte -->
+          <div class="col text-caption text-grey-5 text-right">
+            © 2025
+            <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH</a>.
+            All rights reserved.
           </div>
         </div>
+
       </div>
 
       <!-- Mobile/Tablet/Footer links vertikal -->
@@ -170,6 +175,7 @@
         <div class="column items-center text-caption q-gutter-xs">
 
           <div class="cursor-pointer" @click="openImpressum">Legal Notice</div>
+          <div class="cursor-pointer" @click="openPrivacy">Privacy</div>
           <div class="cursor-pointer" @click="openDisclaimer">Disclaimer</div>
           <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
           <div class="cursor-pointer">Privacy</div>
@@ -183,7 +189,8 @@
             Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
           </div>
           <div class="text-caption text-grey-5 text-right">
-            © 2025 Skysail Consulting GmbH. All rights reserved.
+            © 2025 <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH </a>.
+            All rights reserved.
           </div>
         </div>
       </div>
@@ -232,7 +239,7 @@
       <q-separator />
 
       <q-card-actions align="right">
-        <q-btn flat label="Close" color="teal" v-close-popup />
+        <q-btn flat label="Close" color="primary" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -280,6 +287,66 @@
             sending non-requested advertising material and information is hereby explicitly prohibited. The site
             operators expressly reserve the right to take legal action if unsolicited promotional information such as
             spam emails are sent.</p>
+        </div>
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-actions align="right">
+        <q-btn flat label="Close" color="secondary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
+  <!-- Privacy Dialog -->
+  <q-dialog v-model="showPrivacy" persistent full-width transition-show="fade" transition-hide="fade">
+    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
+      <q-card-section class="row items-center justify-between">
+        <div class="text-h6">Privacy
+        </div>
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-section class="scroll" style="max-height: 70vh;">
+        <div>
+          <p><strong>Privacy Notice</strong></p>
+          <p>We take the protection of your personal data very seriously. In accordance with the European General Data
+            Protection Regulation (GDPR), we are committed to ensuring that your personal data is collected, processed,
+            and stored in a lawful, transparent, and secure manner.
+          </p>
+
+          <p><strong>Data Collection and Usage</strong></p>
+          <p>We only collect personal data when it is necessary for the use of our services, such as when you register,
+            use our features, or contact us. This data may include your name, email address, usage data, and technical
+            information (e.g. browser type, device type, IP address).</p>
+
+          <p><strong>Analytics and Cookies</strong></p>
+          <p>We use third-party services such as Google Analytics to understand how visitors use our site and to
+            improve your experience. These services may use cookies and similar technologies to collect anonymized usage
+            data.<br>
+
+            By using our website, you consent to the use of these tools. You can revoke or manage your consent at any
+            time by adjusting your browser settings or using our cookie banner.
+          </p>
+          <p><strong>Data Security</strong></p>
+          <p>Your data is stored securely and will never be shared with third parties without your explicit consent,
+            unless required by law.
+          </p>
+          <p><strong>Your Rights</strong></p>
+          <p>In accordance with GDPR, you have the right to:
+          <ul>
+            <li>Access your stored personal data</li>
+            <li>Request correction or deletion</li>
+            <li>Restrict or object to data processing</li>
+            <li>Lodge a complaint with a data protection authority</li>
+          </ul>
+
+          If you have any questions or concerns about your personal data, feel free to contact us at
+          <i>info@bibbly.cloud</i>.
+          </p>
+          <p>Last updated: July 2025</p>
         </div>
       </q-card-section>
 
@@ -342,6 +409,9 @@ const showBackButton = computed(() =>
 );
 const showImpressum = ref(false);
 const showDisclaimer = ref(false);
+const showPrivacy = ref(false);
+const browserName = ref('Browser');
+const supportedBrowsers = ['Chrome', 'Firefox', 'Edge', 'Opera'];
 
 //Kontaktformular
 const contactDialog = ref(false);
@@ -399,6 +469,10 @@ function openDisclaimer() {
   showDisclaimer.value = true;
 }
 
+function openPrivacy() {
+  showPrivacy.value = true;
+}
+
 function submitContactForm() {
 
   // Hier könntest du eine API ansprechen
@@ -447,7 +521,8 @@ function validateMessage(val: string) {
 }
 
 onMounted(() => {
-  generateCaptcha()
+  generateCaptcha();
+  browserName.value = detectBrowser();
 })
 
 function generateCaptcha() {
@@ -476,6 +551,10 @@ async function scrollToSection(sectionId: string) {
   }
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function scrollToAnchor(sectionId: string) {
   setTimeout(() => {
     const el = document.getElementById(sectionId)
@@ -486,6 +565,25 @@ function scrollToAnchor(sectionId: string) {
     }
   }, 100)
 }
+
+function detectBrowser(): string {
+  const ua = navigator.userAgent;
+
+  if (/OPR\//.test(ua)) return 'Opera';
+  if (/Edg\//.test(ua)) return 'Edge';
+  if (/Chrome\//.test(ua) && !/Edg\//.test(ua) && !/OPR\//.test(ua)) return 'Chrome';
+  if (/Firefox\//.test(ua)) return 'Firefox';
+  if (/Safari/.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+  return 'Browser';
+}
+
+const isSupportedBrowser = computed(() =>
+  supportedBrowsers.includes(browserName.value)
+);
+
+const extensionLabel = computed(() =>
+  isSupportedBrowser.value ? `Add to ${browserName.value}` : 'Get extension'
+);
 
 </script>
 
