@@ -104,12 +104,12 @@
           <q-item-section>Share</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple @click="onAgb">
+        <q-item clickable v-ripple :to="{ path: '/privacy' }">
           <q-item-section avatar><q-icon name="gavel" /></q-item-section>
           <q-item-section>Terms</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple @click="openImpressum">
+        <q-item clickable v-ripple :to="{ path: '/legal-notice' }">
           <q-item-section avatar><q-icon name="info" /></q-item-section>
           <q-item-section>Legal Notice</q-item-section>
         </q-item>
@@ -134,10 +134,10 @@
       <div v-if="$q.screen.gt.sm" class="column items-center q-mb-md q-mt-md">
 
         <div class="row q-gutter-md justify-center">
-          <q-btn flat dense label="Legal Notice" class="text-capitalize text-caption" @click="openImpressum" />
-          <q-btn flat dense label="Privacy" class="text-capitalize text-caption" @click="openPrivacy" />
-          <q-btn flat dense label="Disclaimer" class="text-capitalize text-caption" @click="openDisclaimer" />
-          <q-btn flat dense label="Contact" class="text-capitalize text-caption" @click="contactDialog = true" />
+          <q-btn flat dense label="Legal Notice" class="text-caption text-capitalize" :to="{ path: '/legal-notice' }" />
+          <q-btn flat dense label="Privacy" class="text-caption text-capitalize" :to="{ path: '/privacy' }" />
+          <q-btn flat dense label="Disclaimer" class="text-caption text-capitalize" :to="{ path: '/disclaimer' }" />
+          <q-btn flat dense label="Contact" class="text-caption text-capitalize" @click="contactDialog = true" />
         </div>
 
         <!-- Attribution & Copyright in einer Zeile -->
@@ -174,11 +174,11 @@
         <!-- Vertikale Linkliste -->
         <div class="column items-center text-caption q-gutter-xs">
 
-          <div class="cursor-pointer" @click="openImpressum">Legal Notice</div>
-          <div class="cursor-pointer" @click="openPrivacy">Privacy</div>
-          <div class="cursor-pointer" @click="openDisclaimer">Disclaimer</div>
-          <div class="cursor-pointer" @click="contactDialog = true">Contact</div>
-          <div class="cursor-pointer">Privacy</div>
+          <q-btn flat dense label="Legal Notice" class="text-caption text-capitalize" :to="{ path: '/legal-notice' }" />
+          <q-btn flat dense label="Privacy" class="text-caption text-capitalize" :to="{ path: '/privacy' }" />
+          <q-btn flat dense label="Disclaimer" class="text-caption text-capitalize" :to="{ path: '/disclaimer' }" />
+          <q-btn flat dense label="Contact" class="text-caption text-capitalize" @click="contactDialog = true" />
+
         </div>
         <!-- Trennlinie -->
         <q-separator spaced class="q-mt-md" />
@@ -198,165 +198,9 @@
     </footer>
 
   </q-layout>
-  <!-- Impressum Dialog -->
-  <q-dialog v-model="showImpressum" persistent full-width transition-show="fade" transition-hide="fade">
-    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
-      <q-card-section class="row items-center justify-between">
-        <div class="text-h6">Information according to section 5 DDG (Digitale Dienste Gesetz)
-        </div>
-        <q-btn icon="close" flat round dense v-close-popup />
-      </q-card-section>
 
-      <q-separator />
 
-      <q-card-section class="scroll" style="max-height: 70vh;">
-        <div>
-          <p><i>This legal notice applies to the online service Bibbly (www.bibbly.io), a product of Skysail
-              Consulting GmbH.</i></p>
-          <p>
-            Skysail Consulting GmbH <br>
-            Spielwang 7<br />
-            83377 Vachendorf<br />
-            Germany</p>
 
-          <p><strong>Contact:</strong></p>
-          <p>Email: info@skysail.io<br />
-            Phone: + 49 (0) 861 166 267 81</p>
-
-          <p><strong>Managing Director:</strong></p>
-          <p>Carsten Gräf</p>
-
-          <p><strong>Register Entry:</strong></p>
-          <p>Registration in the commercial register.<br />
-            Register court: Commercial Register B Traunstein<br />
-            Register number: HRB 27170</p>
-
-          <p><strong>VAT Number:</strong></p>
-          <p>DE319194915</p>
-        </div>
-      </q-card-section>
-
-      <q-separator />
-
-      <q-card-actions align="right">
-        <q-btn flat label="Close" color="primary" v-close-popup />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
-
-  <!-- Disclaimer Dialog -->
-  <q-dialog v-model="showDisclaimer" persistent full-width transition-show="fade" transition-hide="fade">
-    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
-      <q-card-section class="row items-center justify-between">
-        <div class="text-h6">Disclaimer
-        </div>
-        <q-btn icon="close" flat round dense v-close-popup />
-      </q-card-section>
-
-      <q-separator />
-
-      <q-card-section class="scroll" style="max-height: 70vh;">
-        <div>
-          <p><strong>Legal disclaimer</strong></p>
-          <p>The contents of these pages were prepared with utmost care. Nonetheless, we cannot assume liability for the
-            timeless accuracy, correctness and completeness of the information.<br><br>
-
-            Our website contains links to external websites. The content of these websites has not been investigated or
-            analyzed by us, and we do not warrant the adequacy, accuracy, reliability or completeness of any information
-            on hyperlinked or referenced websites and disclaim any liability for any and all of their content.
-            Responsibility for the contents of the linked pages is always held by the provider or operator of the pages.
-          </p>
-
-          <p><strong>Copyright</strong></p>
-          <p>The content and works created by the page operators and presented on these pages is governed by German
-            copyright law. Reproduction, processing, dissemination and any type of use beyond what is permitted under
-            copyright requires written authorisation from the respective author and/or the creator. Downloads and copies
-            of these pages are only meant for private use and exclude any commercial use. In so far as the contents on
-            this page were not created by the operator, third-party copyrights are respected. In particular, the content
-            of third parties is identified as such. Should you nevertheless become aware of an infringement of
-            copyright, we kindly request that you inform us. As soon as we become aware of breaches of law, we will
-            immediately remove such contents.</p>
-
-          <p><strong>Data Protection</strong></p>
-          <p>In general, when visiting our website no personal data are saved. However, these data can be given on a
-            voluntary basis (e.g. name or email address). No data will be passed on to third parties without your
-            consent. We point out that in regard to unsecured data transmission in the internet (e.g. via email),
-            security cannot be guaranteed. Such data could possibly be accessed by third parties. <br><br>
-
-            The use of contact data published within the framework of the imprint regulations by third parties for
-            sending non-requested advertising material and information is hereby explicitly prohibited. The site
-            operators expressly reserve the right to take legal action if unsolicited promotional information such as
-            spam emails are sent.</p>
-        </div>
-      </q-card-section>
-
-      <q-separator />
-
-      <q-card-actions align="right">
-        <q-btn flat label="Close" color="secondary" v-close-popup />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
-
-  <!-- Privacy Dialog -->
-  <q-dialog v-model="showPrivacy" persistent full-width transition-show="fade" transition-hide="fade">
-    <q-card class="q-pa-md" style="max-width: 800px; width: 90vw; max-height: 90vh;">
-      <q-card-section class="row items-center justify-between">
-        <div class="text-h6">Privacy
-        </div>
-        <q-btn icon="close" flat round dense v-close-popup />
-      </q-card-section>
-
-      <q-separator />
-
-      <q-card-section class="scroll" style="max-height: 70vh;">
-        <div>
-          <p><strong>Privacy Notice</strong></p>
-          <p>We take the protection of your personal data very seriously. In accordance with the European General Data
-            Protection Regulation (GDPR), we are committed to ensuring that your personal data is collected, processed,
-            and stored in a lawful, transparent, and secure manner.
-          </p>
-
-          <p><strong>Data Collection and Usage</strong></p>
-          <p>We only collect personal data when it is necessary for the use of our services, such as when you register,
-            use our features, or contact us. This data may include your name, email address, usage data, and technical
-            information (e.g. browser type, device type, IP address).</p>
-
-          <p><strong>Analytics and Cookies</strong></p>
-          <p>We use third-party services such as Google Analytics to understand how visitors use our site and to
-            improve your experience. These services may use cookies and similar technologies to collect anonymized usage
-            data.<br>
-
-            By using our website, you consent to the use of these tools. You can revoke or manage your consent at any
-            time by adjusting your browser settings or using our cookie banner.
-          </p>
-          <p><strong>Data Security</strong></p>
-          <p>Your data is stored securely and will never be shared with third parties without your explicit consent,
-            unless required by law.
-          </p>
-          <p><strong>Your Rights</strong></p>
-          <p>In accordance with GDPR, you have the right to:
-          <ul>
-            <li>Access your stored personal data</li>
-            <li>Request correction or deletion</li>
-            <li>Restrict or object to data processing</li>
-            <li>Lodge a complaint with a data protection authority</li>
-          </ul>
-
-          If you have any questions or concerns about your personal data, feel free to contact us at
-          <i>info@bibbly.cloud</i>.
-          </p>
-          <p>Last updated: July 2025</p>
-        </div>
-      </q-card-section>
-
-      <q-separator />
-
-      <q-card-actions align="right">
-        <q-btn flat label="Close" color="secondary" v-close-popup />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
 
   <!-- Kontakt Dialog -->
   <q-dialog v-model="contactDialog" persistent>
@@ -407,9 +251,7 @@ const router = useRouter();
 const showBackButton = computed(() =>
   ['recipe-detail'].includes(route.name as string)
 );
-const showImpressum = ref(false);
-const showDisclaimer = ref(false);
-const showPrivacy = ref(false);
+
 const browserName = ref('Browser');
 const supportedBrowsers = ['Chrome', 'Firefox', 'Edge', 'Opera'];
 
@@ -425,7 +267,7 @@ const captchaAnswer = ref('')
 const captchaQuestion = ref('')
 const correctAnswer = ref(0)
 
-const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview']
+const simpleHeaderRoutes = ['welcome', 'login', 'register', 'preview', 'legal-notice', 'privacy', 'disclaimer']
 
 const isSimpleHeader = computed(() =>
   typeof route.name === 'string' && simpleHeaderRoutes.includes(route.name)
@@ -457,21 +299,6 @@ function onShare() {
   console.log('Teilen geklickt')
 }
 
-function onAgb() {
-  console.log('AGB geklickt')
-}
-
-function openImpressum() {
-  showImpressum.value = true;
-}
-
-function openDisclaimer() {
-  showDisclaimer.value = true;
-}
-
-function openPrivacy() {
-  showPrivacy.value = true;
-}
 
 function submitContactForm() {
 

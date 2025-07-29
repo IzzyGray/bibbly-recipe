@@ -40,6 +40,21 @@ const routes: RouteRecordRaw[] = [
         name: 'preview',
         component: () => import('pages/RecipePreviewPage.vue'),
       },
+      {
+        path: 'legal-notice',
+        name: 'legal-notice',
+        component: () => import('pages/LegalNoticePage.vue'),
+      },
+      {
+        path: 'privacy',
+        name: 'privacy',
+        component: () => import('pages/PrivacyPage.vue'),
+      },
+      {
+        path: 'disclaimer',
+        name: 'disclaimer',
+        component: () => import('pages/DisclaimerPage.vue'),
+      },
     ],
   },
   {
