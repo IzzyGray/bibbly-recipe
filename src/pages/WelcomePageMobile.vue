@@ -105,11 +105,18 @@
       </div>
 
       <div class="app-ext-text-welcome text-grey-8 q-mb-md">
-        Install the bibbly browser extension to add links in just one click – from any website, at any time.<br><br>
-        Everything you save is instantly added to your collection – no copy-paste, no hassle.
+        <p v-if="!isSupportedBrowser" class="text-warning" style="font-style: italic;">
+          Sorry, your browser is currently not supported.<br> You can get the extension for the following browsers:
+          {{ supportedBrowsers.join(', ') }}.
+        </p>
+        <p v-else>
+          Install the bibbly browser extension for {{ browserName }} to add links in just one click - from any
+          website, at any time.<br />
+          Everything you save is instantly added to your collection - no copy-paste, no hassle.
+        </p>
       </div>
 
-      <q-btn label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
+      <q-btn v-if="isSupportedBrowser" label="Get the Extension" icon="extension" color="secondary" unelevated size="md"
         class="q-mt-sm text-capitalize" @click="goToExtension" />
     </section>
 
@@ -143,7 +150,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Notify } from 'quasar'
 import Pic200 from 'src/assets/images/pic200.jpg'
@@ -155,6 +162,9 @@ import Pic7 from 'src/assets/images/pic7.png'
 const router = useRouter()
 const demoUrl = ref('')
 const activeSlide = ref(0) // für v-model im q-carousel
+
+const browserName = ref('Browser');
+const supportedBrowsers = ['Chrome', 'Firefox', 'Edge', 'Opera'];
 
 const slides = [
   {
@@ -269,6 +279,27 @@ function scrollToSection(sectionId: string) {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+onMounted(() => {
+  browserName.value = detectBrowser();
+  console.log('Detected browser:', browserName.value);
+})
+
+function detectBrowser(): string {
+  const ua = navigator.userAgent;
+
+  if (/OPR\//.test(ua)) return 'Opera';
+  if (/Edg\//.test(ua)) return 'Edge';
+  if (/Chrome\//.test(ua) && !/Edg\//.test(ua) && !/OPR\//.test(ua)) return 'Chrome';
+  if (/Firefox\//.test(ua)) return 'Firefox';
+  if (/Safari/.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+
+  return 'Browser';
+}
+
+const isSupportedBrowser = computed(() =>
+  supportedBrowsers.includes(browserName.value)
+);
 </script>
 
 <style scoped>

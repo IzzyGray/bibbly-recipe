@@ -70,8 +70,6 @@
 
       </div>
     </section>
-
-
     <!-- Product Section -->
     <section id="product" class="q-py-xl bg-white text-center q-mt-xl">
       <AppPageWrapper maxWidth="960px">
@@ -98,17 +96,12 @@
         </div>
       </AppPageWrapper>
     </section>
-
-
-
     <!-- Download Extension Section -->
     <section id="extension" class="q-pa-xl bg-grey-1 text-center">
       <AppPageWrapper maxWidth="960px">
         <div class="app-ext-welcome q-mb-sm">
           Save Links with the bibbly Extension
         </div>
-
-
         <div class="app-ext-text-welcome q-mb-md">
           <p v-if="!isSupportedBrowser" class="text-warning" style="font-style: italic;">
             Sorry, your browser is currently not supported.<br> You can get the extension for the following browsers:
@@ -119,14 +112,11 @@
             website, at any time.<br />
             Everything you save is instantly added to your collection - no copy-paste, no hassle.
           </p>
-
         </div>
-
         <q-btn v-if="isSupportedBrowser" label="Get the Extension" icon="extension" color="primary" unelevated size="md"
           class="q-mt-sm text-capitalize" @click="goToExtension" />
       </AppPageWrapper>
     </section>
-
     <!-- About Section -->
     <section id="about" class="q-pa-xl">
       <AppPageWrapper maxWidth="960px">

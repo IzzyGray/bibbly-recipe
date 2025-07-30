@@ -58,7 +58,7 @@
                 </q-item>
                 <q-item clickable v-close-popup @click="() => scrollToSection('extension')"
                   class="text-warning text-italic">
-                  <q-item-section>Add to Chrome</q-item-section>
+                  <q-item-section>{{ extensionLabel }}</q-item-section>
                 </q-item>
                 <q-separator spaced />
                 <q-item clickable v-close-popup @click="goToLogin">
@@ -204,8 +204,6 @@
       </div>
 
     </footer>
-
-
   </q-layout>
 
 
