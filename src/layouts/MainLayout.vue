@@ -240,7 +240,7 @@
       </q-card-section>
     </q-card>
   </q-dialog>
-
+  <cookie-consent />
 </template>
 
 <script setup lang="ts">
@@ -248,6 +248,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
+import CookieConsent from 'components/CookieConsent.vue'
 
 
 const rightDrawerOpen = ref(false);
