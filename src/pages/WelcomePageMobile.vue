@@ -7,9 +7,9 @@
         <div class="app-desc-welcome">
           Bookmarks, But <span class="gradient-text">Better</span>
         </div>
-        <div class="app-desc-text-welcome q-mt-lg">
-          The links you save are more than just URLs – they reflect your curiosity, your taste, and your intent.<br>
-          Collected together, they form a curated mosaic of meaning – uniquely yours.<br>
+        <div class="app-desc-text-welcome text-grey-8 q-mt-lg">
+          The links you save are more than just URLs – they reflect your curiosity, your taste, and your intent.<br><br>
+          Collected together, they form a curated mosaic of meaning – uniquely yours.<br><br>
           And when you share them with friends or family, they become a trusted shortcut to what’s worth seeing.
         </div>
         <div class="row justify-center q-gutter-sm q-mt-xl">
@@ -17,44 +17,34 @@
             <span style="font-size: 1rem;">Start free trial</span>
           </q-btn>
 
-          <q-btn style="background: #191919; color: white" class="text-capitalize q-ml-sm">
+          <q-btn style="background: #191919; color: white" class="text-capitalize q-ml-sm"
+            @click="scrollToSection('product')">
             <span style="font-size: 1rem;">Learn more</span>
           </q-btn>
         </div>
       </div>
     </section>
 
-    <!-- Product Section -->
-    <section id="product" class="q-pa-xl text-center">
-      <div class="app-ext-welcome q-mb-sm">
-        How Bibbly works
-      </div>
-
-      <div class="text-subtitle2 text-grey-7 q-mb-md">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa.
-      </div>
-    </section>
-
     <!-- Cards Section (instead Carousel) with Collections -->
-    <section id="collections" class="q-pa-sm q-pa-md-md flex flex-center">
-      <div class="text-center q-mb-lg">
+    <section id="collections" class="q-pa-sm flex flex-center bg-grey-1">
+      <div class="text-center q-ma-lg">
         <div class="app-ext-welcome">
           Explore Your Collections
         </div>
-        <div class="text-subtitle2 text-grey-7 q-mt-xs">
+        <div class="app-ext-text-welcome text-grey-8 q-mt-xs">
           Choose from a variety of smart link collections tailored to your interests - and try them instantly.
         </div>
       </div>
 
       <q-carousel v-model="activeSlide" animated swipeable navigation padding control-color="secondary" height="auto"
-        arrows>
+        arrows class="bg-grey-1">
         <q-carousel-slide v-for="(item, index) in slides" :key="index" :name="index" class="q-pa-sm">
           <q-card flat bordered class="q-pa-md">
-            <q-img :src="item.img" />
+            <q-img :src="item.img" style="height: 200px; object-fit: cover;" spinner-color="secondary"
+              class="full-width" />
             <div class="column items-center">
-              <div class="app-card-title-welcome q-mt-md">{{ item.title }}</div>
-              <div class="text-subtitle2 text-grey-7 text-center q-mt-sm">
+              <div class="app-card-title-welcome q-mt-md text-accent">{{ item.title }}</div>
+              <div class="text-body text-grey-7 text-center q-mt-sm">
                 {{ item.subtitle }}
               </div>
               <q-form @submit.prevent="submitUrl" class="full-width q-mt-md">
@@ -71,6 +61,42 @@
       </q-carousel>
     </section>
 
+    <!-- Product Section -->
+    <section id="product" class="q-pa-xl">
+      <!-- Zentrierter Bereich -->
+      <div class="text-center">
+        <div class="app-ext-welcome q-mb-sm">
+          Key Features at a Glance
+        </div>
+
+        <div class="app-ext-text-welcome q-mb-md text-grey-8">
+          Discover how bibbly helps you collect, organize, and preserve online content effortlessly.
+        </div>
+      </div>
+
+      <!-- Liste -->
+      <div class="feature-list-wide">
+        <q-list separator inset class="q-px-md feature-item">
+          <q-item v-for="(feature, index) in features" :key="index" class="q-py-md feature-item">
+            <div class="feature-content">
+
+              <q-icon :name="feature.icon" color="secondary" size="32px" class="feature-icon" />
+              <div class="feature-text">
+                <div class="text-h6 text-accent">
+                  {{ feature.title }}
+                </div>
+                <div class="text-subtitle1 q-mt-xs text-grey-8">
+                  {{ feature.description }}
+                </div>
+              </div>
+
+            </div>
+          </q-item>
+        </q-list>
+      </div>
+    </section>
+
+
 
     <!-- Download Extension Section -->
     <section id="extension" class="q-pa-xl bg-grey-1 text-center">
@@ -78,8 +104,8 @@
         Save Links with the bibbly Extension
       </div>
 
-      <div class="text-subtitle2 text-grey-7 q-mb-md">
-        Install the bibbly browser extension to add links in just one click – from any website, at any time.<br />
+      <div class="app-ext-text-welcome text-grey-8 q-mb-md">
+        Install the bibbly browser extension to add links in just one click – from any website, at any time.<br><br>
         Everything you save is instantly added to your collection – no copy-paste, no hassle.
       </div>
 
@@ -93,18 +119,26 @@
         About
       </div>
 
-      <div class="text-subtitle2 text-grey-7 q-mb-md">
+      <div class="q-my-md flex flex-center">
+        <q-img :src="Pic200" class="about-image-mobile" spinner-color="primary"
+          alt="Organizing information illustration" />
+      </div>
+
+      <div class="app-ext-text-welcome text-grey-8 q-mb-sm">
         We believe that small, clever tools can simplify your life and give you the time to focus on what truly
-        matters.<br>
+        matters.<br><br>
         As IT professionals, we spend a lot of time at our computers, often with
         numerous tabs open,
-        gathering all kinds of information. <br>
+        gathering all kinds of information. <br><br>
         Our mission is to keep this information organized and easily
-        retrievable.<br>
+        retrievable.<br><br>
         That's where Bibbly comes in –
         designed to help us, and hopefully, to help you too.
       </div>
+
     </section>
+    <section class="text-center"> <q-btn flat dense class="text-capitalize text-caption" @click="scrollToTop"
+        label="Back to Top" icon-right="arrow_upward" size="sm" color="grey" /></section>
   </q-page>
 </template>
 
@@ -112,6 +146,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Notify } from 'quasar'
+import Pic200 from 'src/assets/images/pic200.jpg'
 import Pic30 from 'src/assets/images/pic30.jpg'
 import Pic20 from 'src/assets/images/pic20.jpg'
 import Pic10 from 'src/assets/images/pic10.jpg'
@@ -156,6 +191,39 @@ const slides = [
   }
 ]
 
+const features = [
+  {
+    icon: 'search',
+    title: 'Search',
+    description: 'Quickly search across your collections and webpages to access what you need in seconds.'
+  },
+  {
+    icon: 'comment',
+    title: 'Comments',
+    description: 'Leave notes or reminders on links, snapshots, or collections - just for you or your team.'
+  },
+  {
+    icon: 'photo_camera',
+    title: 'Snapshots',
+    description: 'Save a visual copy of any webpage as it appears today - reliable, even if it changes tomorrow.'
+  },
+  {
+    icon: 'description',
+    title: 'Metadata',
+    description: 'Automatically store title, author, URL, and access date to ensure trustworthy references.'
+  },
+  {
+    icon: 'share',
+    title: 'Share',
+    description: 'Share your curated content with family, friends, or collaborators - instantly and easily.'
+  },
+  {
+    icon: 'notifications',
+    title: 'Monitoring',
+    description: 'Create alerts and get notified when a webpage changes - stay informed without effort.'
+  }
+]
+
 function isValidUrl(val: string) {
   const pattern = new RegExp(
     '^(https?:\\/\\/)?' + // optional http(s)
@@ -186,10 +254,82 @@ async function goToRegister() {
 function goToExtension() {
   window.open('https://example.com/extension', '_blank')
 }
+
+function scrollToSection(sectionId: string) {
+  setTimeout(() => {
+    const el = document.getElementById(sectionId)
+    if (el) {
+      const offset = 80 // Header-Höhe ggf. dynamisch machen
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  }, 100)
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 <style scoped>
 .welcome-bg {
   background-color: white;
+}
+
+
+.about-image-mobile {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.feature-list-wide {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-description {
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: grey;
+}
+
+@media (max-width: 560px) {
+  .feature-description {
+    font-size: 0.8rem;
+  }
+}
+
+.feature-content {
+  display: flex;
+  align-items: center;
+  /* <- zentriert Icon vertikal zum Textblock */
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.feature-text {
+  flex: 1;
+}
+
+.feature-icon {
+  flex-shrink: 0;
+}
+
+/* Mobile: Icon über dem Text */
+@media (max-width: 500px) {
+  .feature-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .feature-text {
+    text-align: center;
+  }
 }
 </style>

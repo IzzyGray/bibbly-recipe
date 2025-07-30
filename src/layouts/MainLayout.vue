@@ -3,7 +3,7 @@
 
     <!-- Variante 1: Header für Welcome Seiten ohne Anmeldung -->
     <q-header v-if="isSimpleHeader" class="bg-transparent-header">
-      <q-toolbar class="q-py-md q-px-lg q-gutter-md items-center">
+      <q-toolbar class="q-py-md q-px-lg items-center justify-between">
 
         <!-- Logo links -->
         <div class="row items-center cursor-pointer q-gutter-sm" @click="goToWelcome">
@@ -29,7 +29,8 @@
           </q-btn>
         </div>
 
-        <!-- Rechte Buttons (Login / Sign Up) -->
+
+        <!-- Rechte Seite: Auth oder Menü-Icon -->
         <div class="row items-center q-gutter-sm">
           <!-- Desktop -->
           <div class="row q-gutter-sm items-center" v-if="$q.screen.gt.sm">
@@ -43,7 +44,7 @@
           </div>
 
           <!-- Mobile -->
-          <q-btn dense round flat icon="login" color="secondary" v-else>
+          <q-btn dense round flat icon="menu" color="secondary" v-else>
             <q-menu>
               <q-list style="min-width: 120px">
                 <q-item clickable v-close-popup @click="() => scrollToSection('collections')">
@@ -130,9 +131,8 @@
     </q-page-container>
     <footer class="q-pa-sm q-px-lg q-mt-lg bg-grey-1 text-grey-9">
 
-      <!-- Desktop/Footer links horizontal -->
+      <!-- Desktop (ab sm > 1024px) -->
       <div v-if="$q.screen.gt.sm" class="column items-center q-mb-md q-mt-md">
-
         <div class="row q-gutter-md justify-center">
           <q-btn flat dense label="Legal Notice" class="text-caption text-capitalize" :to="{ path: '/legal-notice' }" />
           <q-btn flat dense label="Privacy" class="text-caption text-capitalize" :to="{ path: '/privacy' }" />
@@ -140,62 +140,71 @@
           <q-btn flat dense label="Contact" class="text-caption text-capitalize" @click="contactDialog = true" />
         </div>
 
-        <!-- Attribution & Copyright in einer Zeile -->
         <div class="row items-start q-px-sm q-mt-xl full-width">
-          <!-- Linke Spalte -->
           <div class="col text-caption text-grey-5">
             Images designed by
             <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
           </div>
-
-          <!-- Mittlere Spalte: Back to top -->
           <div class="col-auto">
             <q-btn flat dense class="text-capitalize text-caption" @click="scrollToTop" label="Back to Top"
               icon-right="arrow_upward" size="sm" color="grey" />
           </div>
-
-          <!-- Rechte Spalte -->
           <div class="col text-caption text-grey-5 text-right">
             © 2025
-            <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH</a>.
-            All rights reserved.
+            <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH</a>. All
+            rights
+            reserved.
           </div>
         </div>
-
       </div>
 
-      <!-- Mobile/Tablet/Footer links vertikal -->
-      <div v-else class="column items-center q-mb-md text-center">
-        <!-- Titel -->
-        <div class="text-subtitle2 text-uppercase text-grey-6 text-weight-bold q-mb-sm">
-          Where to?
-        </div>
+      <!-- Mobile & Tablet (≤ sm) -->
+      <div v-else class="column items-center q-mb-md q-mt-md q-px-md text-center">
 
-        <!-- Vertikale Linkliste -->
-        <div class="column items-center text-caption q-gutter-xs">
-
+        <!-- Tablet-Ansicht (horizontal) -->
+        <div v-if="$q.screen.gt.xs" class="row q-gutter-md justify-center items-center q-mb-sm">
           <q-btn flat dense label="Legal Notice" class="text-caption text-capitalize" :to="{ path: '/legal-notice' }" />
           <q-btn flat dense label="Privacy" class="text-caption text-capitalize" :to="{ path: '/privacy' }" />
           <q-btn flat dense label="Disclaimer" class="text-caption text-capitalize" :to="{ path: '/disclaimer' }" />
           <q-btn flat dense label="Contact" class="text-caption text-capitalize" @click="contactDialog = true" />
-
         </div>
-        <!-- Trennlinie -->
-        <q-separator spaced class="q-mt-md" />
 
-        <!-- Attribution + Copyright in einer Zeile -->
-        <div class="row justify-between items-start q-px-md q-mt-sm full-width">
+        <!-- Mobile-Ansicht (vertikal) -->
+        <div v-else class="column items-center q-gutter-xs q-mb-sm">
+          <q-btn flat dense label="Legal Notice" class="text-caption text-capitalize" :to="{ path: '/legal-notice' }" />
+          <q-btn flat dense label="Privacy" class="text-caption text-capitalize" :to="{ path: '/privacy' }" />
+          <q-btn flat dense label="Disclaimer" class="text-caption text-capitalize" :to="{ path: '/disclaimer' }" />
+          <q-btn flat dense label="Contact" class="text-caption text-capitalize" @click="contactDialog = true" />
+        </div>
+
+        <!-- Attribution & Copyright -->
+        <div v-if="$q.screen.gt.xs" class="row justify-between items-start q-mt-sm full-width">
           <div class="text-caption text-grey-5">
             Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
           </div>
           <div class="text-caption text-grey-5 text-right">
-            © 2025 <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH </a>.
-            All rights reserved.
+            © 2025 <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH</a>.
+            All
+            rights reserved.
           </div>
         </div>
+
+        <!-- Vertikal auf kleinen Screens -->
+        <div v-else class="column items-center q-gutter-xs q-mt-sm full-width text-caption text-grey-5">
+          <div>
+            Images designed by <a href="https://www.freepik.com" target="_blank" class="text-secondary">Freepik</a>
+          </div>
+          <div>
+            © 2025 <a href="https://www.skysail.io" target="_blank" class="text-secondary">Skysail Consulting GmbH</a>.
+            All
+            rights reserved.
+          </div>
+        </div>
+
       </div>
 
     </footer>
+
 
   </q-layout>
 

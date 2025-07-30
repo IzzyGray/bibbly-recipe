@@ -84,6 +84,7 @@
         </div>
 
         <div class="row q-gutter-y-xl justify-between">
+
           <q-card v-for="(feature, index) in features" :key="index" class="q-pa-sm" flat bordered
             style="width: 32%; min-height: 220px; display: flex; flex-direction: column; justify-content: center;">
             <q-card-section class="text-center">
