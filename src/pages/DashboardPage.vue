@@ -9,7 +9,7 @@ import { computed } from 'vue'
 import { useQuasar } from 'quasar'
 
 
-import DashboardPageMobile from './DashboradPageMobile.vue'
+import DashboardPageMobile from './DashboardPageMobile.vue'
 import DashboardPageDesktop from './DashboardPageDesktop.vue'
 
 const $q = useQuasar()
