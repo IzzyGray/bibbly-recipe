@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-transparent-header">
 
-    <q-header class=" bg-white text-grey-8" height-hint="64">
-      <q-toolbar class="GNL__toolbar">
+    <q-header class="bg-white text-grey-8">
+      <q-toolbar class="q-py-sm q-px-lg items-center justify-between">
         <q-btn flat dense round @click="toggleLeftDrawer" aria-label="Menu" icon="menu" class="q-mr-sm" />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
@@ -11,59 +11,11 @@
 
         <q-space />
 
-        <q-input class="GNL__toolbar-input" outlined dense v-model="search" color="bg-grey-7 shadow-1"
-          placeholder="Search for collections, links & keywords">
+        <q-input class="GNL__toolbar-input" outlined dense v-model="search" color="bg-grey-7"
+          placeholder="Search for Collections, Links & Keywords">
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search" />
             <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
-          </template>
-          <template v-slot:append>
-            <q-btn flat dense round aria-label="Menu" icon="arrow_drop_down">
-              <q-menu anchor="bottom end" self="top end">
-                <div class="q-pa-md" style="width: 400px">
-                  <div class="text-body2 text-grey q-mb-md">
-                    Narrow your search results
-                  </div>
-
-                  <div class="row items-center">
-                    <div class="col-3 text-subtitle2 text-grey">
-                      Exact phrase
-                    </div>
-                    <div class="col-9 q-pl-md">
-                      <q-input dense v-model="exactPhrase" />
-                    </div>
-
-                    <div class="col-3 text-subtitle2 text-grey">
-                      Has words
-                    </div>
-                    <div class="col-9 q-pl-md">
-                      <q-input dense v-model="hasWords" />
-                    </div>
-
-                    <div class="col-3 text-subtitle2 text-grey">
-                      Exclude words
-                    </div>
-                    <div class="col-9 q-pl-md">
-                      <q-input dense v-model="excludeWords" />
-                    </div>
-
-                    <div class="col-3 text-subtitle2 text-grey">
-                      Website
-                    </div>
-                    <div class="col-9 q-pl-md">
-                      <q-input dense v-model="byWebsite" />
-                    </div>
-
-                    <div class="col-12 q-pt-lg row justify-end">
-                      <q-btn flat dense no-caps color="grey-7" size="md" style="min-width: 68px;" label="Search"
-                        v-close-popup />
-                      <q-btn flat dense no-caps color="grey-7" size="md" style="min-width: 68px;" @click="onClear"
-                        label="Clear" v-close-popup />
-                    </div>
-                  </div>
-                </div>
-              </q-menu>
-            </q-btn>
           </template>
         </q-input>
 
@@ -79,32 +31,32 @@
             </q-badge>
             <q-tooltip>Notifications</q-tooltip>
           </q-btn> -->
-          <q-btn-dropdown class="acc-btn no-hover" flat round size="lg" icon="account_circle" color="secondary"
-            dropdown-icon="none" :ripple="false">
+          <q-btn-dropdown id="accountMenuBtn" class="acc-btn no-hover" flat round size="lg" icon="account_circle"
+            color="secondary" dropdown-icon="none" :ripple="false" @show="onAccountMenuShow" @hide="onAccountMenuHide">
 
             <q-list style="min-width: 260px">
 
               <!-- Header: Avatar + Name + Email -->
               <div class="row items-center q-pa-md q-gutter-md">
-                <q-avatar size="56px">
-                  <q-icon name="account_circle" />
+                <q-avatar>
+                  <q-icon size="lg" color="secondary" name="account_circle" />
                 </q-avatar>
                 <div class="col">
-                  <div class="text-subtitle1">John Doe</div>
+                  <div class="text-subtitle1">{{ userName }}</div>
                   <div class="text-caption text-grey-7">john.doe@email.com</div>
                 </div>
               </div>
 
               <!-- Get a plan -->
               <div class="q-px-md q-pb-sm">
-                <q-btn label="Get a plan" color="primary" unelevated class="full-width" @click="onGetPlan"
+                <q-btn label="Get a plan" color="primary" unelevated class="full-width" @click="getPlan"
                   v-close-popup />
               </div>
 
               <q-separator spaced />
 
               <!-- Account -->
-              <q-item clickable v-ripple @click="goToAccount" v-close-popup>
+              <q-item clickable v-ripple @click="showAccount" v-close-popup>
                 <q-item-section avatar>
                   <q-icon name="manage_accounts" />
                 </q-item-section>
@@ -113,25 +65,38 @@
                 </q-item-section>
               </q-item>
 
+              <!-- Subscription -->
+              <q-item clickable v-ripple @click="openSubscription" v-close-popup>
+                <q-item-section avatar>
+                  <q-icon name="credit_card" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Subscription</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-badge color="secondary" rounded class="q-ml-sm">free</q-badge>
+                </q-item-section>
+              </q-item>
+
               <!-- Language -->
-              <q-item clickable v-ripple @click="openLanguage" v-close-popup>
+              <!--             <q-item clickable v-ripple @click="openLanguage" v-close-popup>
                 <q-item-section avatar>
                   <q-icon name="language" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>Language</q-item-label>
                 </q-item-section>
-              </q-item>
+              </q-item> -->
 
               <!-- Help center -->
-              <q-item clickable v-ripple @click="openHelpCenter" v-close-popup>
+              <!--             <q-item clickable v-ripple @click="openHelpCenter" v-close-popup>
                 <q-item-section avatar>
                   <q-icon name="help_center" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>Help center</q-item-label>
                 </q-item-section>
-              </q-item>
+              </q-item> -->
 
               <q-separator spaced />
 
@@ -146,6 +111,15 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
+
+          <!-- Tooltip separat, mit Ziel auf den Button -->
+          <q-tooltip ref="accTooltip" :target="'#accountMenuBtn'" :disable="isAccountMenuOpen"
+            class="bg-white text-grey-9 shadow-3" anchor="bottom middle" self="top middle" :offset="[0, 10]"
+            transition-show="jump-down" transition-hide="jump-up">
+            <div class="text-weight-medium q-mb-xs">bibbly Account</div>
+            <div class="text-caption">{{ userName }}</div>
+            <div class="text-caption">{{ userEmail }}</div>
+          </q-tooltip>
         </div>
       </q-toolbar>
     </q-header>
@@ -256,13 +230,10 @@ import { ref } from 'vue'
 //start new  const & functions
 
 const leftDrawerOpen = ref(false);
-const search = ref('')
-const showDateOptions = ref(false)
-const exactPhrase = ref('')
-const hasWords = ref('')
-const excludeWords = ref('')
-const byWebsite = ref('')
-const byDate = ref('Any time')
+const search = ref('');
+
+const userName = ref('John Doe')
+const userEmail = ref('john.doe@email.com')
 
 const drawerDefaultCollections =
 
@@ -306,14 +277,33 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-function onClear() {
-  exactPhrase.value = ''
-  hasWords.value = ''
-  excludeWords.value = ''
-  byWebsite.value = ''
-  byDate.value = 'Any time'
+
+function getPlan() {
+
 }
 
+function showAccount() {
+
+}
+
+function openHelpCenter() {
+
+}
+
+function logoutUser() {
+
+}
+
+const isAccountMenuOpen = ref(false)
+const accTooltip = ref(null)
+
+function onAccountMenuShow() {
+  isAccountMenuOpen.value = true       // verhindert erneutes Anzeigen
+  accTooltip.value?.hide()             // falls Tooltip gerade sichtbar ist -> sofort ausblenden
+}
+function onAccountMenuHide() {
+  isAccountMenuOpen.value = false
+}
 
 
 
