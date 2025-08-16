@@ -24,9 +24,19 @@
 
         <!-- Rechts -->
         <div class="toolbar-right">
-          <q-btn outline rounded color="warning" icon="add" class="text-capitalize q-px-md add-link-gap">
-            <span style=" font-size: 1rem;">Add link</span>
-          </q-btn>
+          <q-btn-dropdown split outline rounded no-caps size="1rem" color="warning" icon="add"
+            class="q-px-md add-link-gap" label="Add link">
+            <q-list>
+              <q-item clickable v-close-popup>
+                <q-item-section avatar>
+                  <q-icon color="warning" name="add" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-warning">Add Collection</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
 
           <!-- Account rechtsbündig -->
           <q-btn-dropdown id="accountMenuBtn" class="acc-btn no-hover push-right" flat round icon="account_circle"
