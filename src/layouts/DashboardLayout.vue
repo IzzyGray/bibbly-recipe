@@ -1,39 +1,37 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-transparent-header">
 
-    <q-header class="bg-white text-grey-8">
-      <q-toolbar class="q-py-sm q-px-lg items-center justify-between">
-        <q-btn flat dense round @click="toggleLeftDrawer" aria-label="Menu" icon="menu" class="q-mr-sm" />
+    <q-header elevated class="bg-white text-grey-8">
+      <q-toolbar class="toolbar-grid q-py-sm q-px-lg">
+        <!-- Links -->
+        <div class="toolbar-left">
+          <q-btn flat dense round @click="toggleLeftDrawer" icon="menu" class="q-mr-sm" />
+          <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
+            <span class="app-logo-text q-ml-sm gradient-text">bibbly.</span>
+          </q-toolbar-title>
+        </div>
 
-        <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <span class="app-logo-text q-ml-sm gradient-text">bibbly.</span>
-        </q-toolbar-title>
+        <!-- Mitte: SEARCH (zentriert) -->
+        <div class="toolbar-center">
+          <q-input class="GNL__toolbar-input" dense standout="bg-primary" v-model="search"
+            placeholder="Search for Collections, Links & Keywords">
+            <template #prepend>
+              <q-icon v-if="search === ''" name="search" />
+              <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
+            </template>
+          </q-input>
+        </div>
 
-        <q-space />
-
-        <q-input class="GNL__toolbar-input" outlined dense v-model="search" color="bg-grey-7"
-          placeholder="Search for Collections, Links & Keywords">
-          <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search" />
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
-          </template>
-        </q-input>
-
-        <q-space />
-
-        <div class="q-gutter-sm row items-center no-wrap">
-          <!-- <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
-            <q-tooltip>Google Apps</q-tooltip>
+        <!-- Rechts -->
+        <div class="toolbar-right">
+          <q-btn outline rounded color="warning" icon="add" class="text-capitalize q-px-md add-link-gap">
+            <span style=" font-size: 1rem;">Add link</span>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              2
-            </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn> -->
-          <q-btn-dropdown id="accountMenuBtn" class="acc-btn no-hover" flat round size="lg" icon="account_circle"
-            color="secondary" dropdown-icon="none" :ripple="false" @show="onAccountMenuShow" @hide="onAccountMenuHide">
 
+          <!-- Account rechtsbündig -->
+          <q-btn-dropdown id="accountMenuBtn" class="acc-btn no-hover push-right" flat round icon="account_circle"
+            size="lg" color="secondary" dropdown-icon="none" :ripple="false" @show="onAccountMenuShow"
+            @hide="onAccountMenuHide">
             <q-list style="min-width: 260px">
 
               <!-- Header: Avatar + Name + Email -->
@@ -43,7 +41,7 @@
                 </q-avatar>
                 <div class="col">
                   <div class="text-subtitle1">{{ userName }}</div>
-                  <div class="text-caption text-grey-7">john.doe@email.com</div>
+                  <div class="text-caption text-grey-7">{{ userEmail }}</div>
                 </div>
               </div>
 
@@ -78,26 +76,6 @@
                 </q-item-section>
               </q-item>
 
-              <!-- Language -->
-              <!--             <q-item clickable v-ripple @click="openLanguage" v-close-popup>
-                <q-item-section avatar>
-                  <q-icon name="language" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>Language</q-item-label>
-                </q-item-section>
-              </q-item> -->
-
-              <!-- Help center -->
-              <!--             <q-item clickable v-ripple @click="openHelpCenter" v-close-popup>
-                <q-item-section avatar>
-                  <q-icon name="help_center" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>Help center</q-item-label>
-                </q-item-section>
-              </q-item> -->
-
               <q-separator spaced />
 
               <!-- Logout -->
@@ -122,6 +100,7 @@
           </q-tooltip>
         </div>
       </q-toolbar>
+
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-white" :width="280">
@@ -130,7 +109,7 @@
 
           <!-- DEFAULT COLLECTIONS -->
 
-          <q-item class="GNL__drawer-item" v-ripple v-for="link in drawerDefaultCollections" :key="link.text" clickable>
+          <q-item v-ripple v-for="link in drawerDefaultCollections" :key="link.text" clickable>
             <q-item-section avatar>
               <q-icon :name="link.icon" />
             </q-item-section>
@@ -146,7 +125,7 @@
           <q-expansion-item icon="bookmark" label="bibbly Collections" dense group="collectionsgroup" default-opened
             header-class="text-secondary">
             <q-list>
-              <q-item class="GNL__drawer-item q-pl-lg" v-ripple v-for="link in drawerBibblyCollections" :key="link.text"
+              <q-item class="q-pl-lg hover-actions" v-ripple v-for="link in drawerBibblyCollections" :key="link.text"
                 clickable>
                 <q-item-section avatar>
                   <q-icon :name="link.icon" />
@@ -157,6 +136,32 @@
                     {{ link.text }}
                   </q-item-label>
                 </q-item-section>
+
+                <!-- rechtsbündiger More-Button -->
+                <q-item-section side class="actions">
+                  <q-btn class="more-btn" flat dense round size="sm" icon="more_vert" aria-label="More actions"
+                    @click.stop @mousedown.stop>
+                    <q-menu anchor="top right" self="top left" :offset="[0, 0]">
+                      <q-list dense style="min-width: 100px">
+                        <q-item clickable v-close-popup @click="pinCollection(link)">
+                          <q-item-section side class="icon-tight">
+                            <q-icon size="xs" name="push_pin" color="grey-8" />
+                          </q-item-section>
+                          <q-item-section><q-item-label
+                              class="text-grey-8 text-caption">Pin</q-item-label></q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup @click="hideCollection(link)">
+                          <q-item-section side class="icon-tight">
+                            <q-icon size="xs" name="visibility_off" color="grey-8" />
+                          </q-item-section>
+                          <q-item-section><q-item-label
+                              class="text-grey-8 text-caption">Hide</q-item-label></q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-menu>
+                  </q-btn>
+                </q-item-section>
+
               </q-item>
             </q-list>
           </q-expansion-item>
@@ -168,13 +173,16 @@
           <q-expansion-item icon="bookmark" label="My Collections" dense group="collectionsgroup"
             header-class="text-primary">
             <q-list padding>
-              <q-item class="GNL__drawer-item q-pl-lg" clickable v-ripple @click="doSomething">
+              <q-item class="q-pl-lg bg-primary-soft" clickable v-ripple @click="doSomething">
+                <q-item-section avatar class="icon-tight">
+                  <q-icon name="add" />
+                </q-item-section>
                 <q-item-section>
-                  <q-icon name="create_new_folder" />
-                  New Collection
+                  <q-item-label>New Collection</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item class="GNL__drawer-item q-pl-lg" v-ripple v-for="link in drawerCustomCollections" :key="link.text"
+
+              <q-item class="q-pl-lg hover-actions" v-ripple v-for="link in drawerCustomCollections" :key="link.text"
                 clickable>
                 <q-item-section avatar>
                   <q-icon :name="link.icon" />
@@ -185,6 +193,39 @@
                     {{ link.text }}
                   </q-item-label>
                 </q-item-section>
+
+                <!-- rechtsbündiger More-Button -->
+                <q-item-section side class="actions">
+                  <q-btn class="more-btn" flat dense round size="sm" icon="more_vert" aria-label="More actions"
+                    @click.stop @mousedown.stop>
+                    <q-menu anchor="top right" self="top left" :offset="[0, 0]">
+                      <q-list dense style="min-width: 100px">
+                        <q-item clickable v-close-popup @click="pinCollection(link)">
+                          <q-item-section side class="icon-tight">
+                            <q-icon size="xs" name="push_pin" color="grey-8" />
+                          </q-item-section>
+                          <q-item-section><q-item-label
+                              class="text-grey-8 text-caption">Pin</q-item-label></q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup @click="editCollection(link)">
+                          <q-item-section side class="icon-tight">
+                            <q-icon size="xs" name="edit" color="grey-8" />
+                          </q-item-section>
+                          <q-item-section><q-item-label
+                              class="text-grey-8 text-caption">Edit</q-item-label></q-item-section>
+                        </q-item>
+
+                        <q-item clickable v-close-popup @click="deleteCollection(link)">
+                          <q-item-section side class="icon-tight">
+                            <q-icon size="xs" name="delete" color="grey-8" />
+                          </q-item-section>
+                          <q-item-section><q-item-label
+                              class="text-grey-8 text-caption">Delete</q-item-label></q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-menu>
+                  </q-btn>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-expansion-item>
@@ -194,7 +235,7 @@
 
           <!-- SETTINGS -->
 
-          <q-item class="GNL__drawer-item" v-ripple v-for="link in drawerSettings" :key="link.text" clickable>
+          <q-item v-ripple v-for="link in drawerSettings" :key="link.text" clickable>
             <q-item-section>
               <q-item-label>{{ link.text }} <q-icon v-if="link.icon" :name="link.icon" /></q-item-label>
             </q-item-section>
@@ -202,11 +243,10 @@
 
           <div class="q-mt-md">
             <div class="flex flex-center q-gutter-xs">
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="Privacy">Privacy</a>
-              <span> · </span>
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="Terms">Terms</a>
-              <span> · </span>
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="About">© 2025 Skysail</a>
+              <a class="drawer-footer-link text-grey-6" href="javascript:void(0)" aria-label="About">bibbly · created
+                by
+                Skysail · ©
+                {{ new Date().getFullYear() }}</a>
             </div>
           </div>
         </q-list>
@@ -251,6 +291,7 @@ const drawerBibblyCollections =
     { icon: 'radio', text: 'News', isbibblytemplate: true },
     { icon: 'beach_access', text: 'Travel', isbibblytemplate: true },
     { icon: 'restaurant_menu', text: 'Restaurants', isbibblytemplate: true },
+    { icon: 'menu_book', text: 'Bibliography', isbibblytemplate: true }
   ]
 
 const drawerCustomCollections =
@@ -265,8 +306,9 @@ const drawerCustomCollections =
 
 const drawerSettings =
   [
-    { icon: '', text: 'Language & region' },
+
     { icon: '', text: 'Settings' },
+    { icon: '', text: 'About' },
     //{ icon: 'open_in_new', text: 'Get the Android app' },
     //{ icon: 'open_in_new', text: 'Get the iOS app' },
     //{ icon: '', text: 'Send feedback' },
@@ -286,9 +328,6 @@ function showAccount() {
 
 }
 
-function openHelpCenter() {
-
-}
 
 function logoutUser() {
 
@@ -322,6 +361,20 @@ function onAccountMenuHide() {
   /* optional für Glassmokeffekt */
 }
 
+.q-item__label {
+  color: #3c4043;
+  letter-spacing: .01785714em;
+  font-size: .86rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+.drawer-footer-link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: .75rem;
+}
+
 /* Basis-Layer (vor/after) neutralisieren */
 :deep(.no-hover .q-btn__wrapper::before),
 :deep(.no-hover .q-btn__wrapper::after) {
@@ -342,5 +395,96 @@ function onAccountMenuHide() {
 /* Fokus-Hilfslayer entfernen (Tastaturfokus) – optional */
 :deep(.no-hover .q-focus-helper) {
   opacity: 0 !important;
+}
+
+/* für more actions button im Drawer
+/* Platz rechts reservieren, damit nichts springt */
+:deep(.hover-actions .actions) {
+  width: 40px;
+  /* konstante Breite für den Action-Bereich */
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Standard: Button verstecken */
+:deep(.hover-actions .more-btn) {
+  opacity: 0;
+  pointer-events: none;
+  /* nicht anklickbar, solange unsichtbar */
+  transition: opacity .15s ease;
+}
+
+/* Auf Hover ODER Tastaturfokus einblenden */
+:deep(.hover-actions:hover .more-btn),
+:deep(.hover-actions:focus-within .more-btn) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Blasse Primary als Hintergrund von new collection*/
+.bg-primary-soft {
+  background: color-mix(in srgb, var(--q-primary) 8%, white);
+  /* 8–16% wirkt oft gut */
+  border-radius: 0px;
+  /* optional, hübscher */
+  transition: background .15s ease;
+  /* optional */
+}
+
+.bg-primary-soft:hover {
+  background: color-mix(in srgb, var(--q-primary) 12%, white);
+  /* etwas mehr bei Hover */
+}
+
+
+
+/* 3-Spalten-Grid: links | MITTE (Search) | rechts */
+.toolbar-grid {
+  display: grid;
+  grid-template-columns: 1fr clamp(320px, 40vw, 680px) 1fr;
+  /* Mitte bekommt feste Spalte */
+  align-items: center;
+  column-gap: 16px;
+}
+
+/* Links/Rechts als Flex-Zeilen */
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Abstand zwischen Button(s) rechts */
+}
+
+/* Search füllt die mittlere Spalte vollständig */
+.toolbar-center .q-field {
+  width: 100%;
+}
+
+/* Optional: auf sehr kleinen Screens schmaler werden */
+@media (max-width: 700px) {
+  .toolbar-grid {
+    grid-template-columns: 1fr minmax(260px, 1fr) 1fr;
+    column-gap: 12px;
+  }
+}
+
+/* Right-Spalte als Flex-Zeile */
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  /* verhindert komisches Schrumpfen */
+}
+
+/* Schiebt genau dieses Element ganz nach rechts */
+.push-right {
+  margin-left: auto;
+}
+
+/* extra Abstand nur links vom Add-Link-Button */
+.add-link-gap {
+  margin-left: clamp(24px, 5vw, 96px);
 }
 </style>

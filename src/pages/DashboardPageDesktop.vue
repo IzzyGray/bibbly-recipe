@@ -1,9 +1,7 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+  <q-page padding>
+    <!-- dein Seiteninhalt -->
+  </q-page>
 </template>
 
 <script lang="ts">
