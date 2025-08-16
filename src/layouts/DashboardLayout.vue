@@ -5,7 +5,8 @@
       <q-toolbar class="toolbar-grid q-py-sm q-px-lg">
         <!-- Links -->
         <div class="toolbar-left">
-          <q-btn flat dense round @click="toggleLeftDrawer" icon="menu" class="q-mr-sm" />
+          <q-btn flat dense round @click="toggleLeftDrawer"
+            :icon="leftDrawerOpen ? 'sym_o_left_panel_close' : 'sym_o_left_panel_open'" class="q-mr-sm" />
           <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
             <span class="app-logo-text q-ml-sm gradient-text">bibbly.</span>
           </q-toolbar-title>
@@ -13,8 +14,7 @@
 
         <!-- Mitte: SEARCH (zentriert) -->
         <div class="toolbar-center">
-          <q-input class="GNL__toolbar-input" dense standout="bg-primary" v-model="search"
-            placeholder="Search for Collections, Links & Keywords">
+          <q-input dense standout="bg-primary" v-model="search" placeholder="Search for Collections, Links & Keywords">
             <template #prepend>
               <q-icon v-if="search === ''" name="search" />
               <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
@@ -301,7 +301,8 @@ const drawerBibblyCollections =
     { icon: 'radio', text: 'News', isbibblytemplate: true },
     { icon: 'beach_access', text: 'Travel', isbibblytemplate: true },
     { icon: 'restaurant_menu', text: 'Restaurants', isbibblytemplate: true },
-    { icon: 'menu_book', text: 'Bibliography', isbibblytemplate: true }
+    { icon: 'menu_book', text: 'Bibliography', isbibblytemplate: true },
+    { icon: 'shopping_cart', text: 'Shopping', isbibblytemplate: true }
   ]
 
 const drawerCustomCollections =
